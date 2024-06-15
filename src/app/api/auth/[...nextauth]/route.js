@@ -9,6 +9,16 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
+
+  callbacks: {
+    async session({ session, token }) {
+      session.user.userFirstChar = session.user.name.slice(0, 1).toLocaleLowerCase();
+      session.user.userLastName = session.user.name.split(' ')[1].toLocaleLowerCase();
+      session.user.username = session.user.userFirstChar.concat(session.user.userLastName);
+      session.user.uid = token.sub;
+      return session
+    }
+  }
 });
 
 export { handler as GET, handler as POST }
