@@ -1,10 +1,15 @@
-import Image from "next/image";
-import { HiHome } from "react-icons/hi";
+'use client';
 
-import SiteLogo from "../../../public/images/site-logo-trans.webp"
+import { signIn, signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 
+import { HiHome } from "react-icons/hi";
+import SiteLogo from "../../../public/images/site-logo-trans.webp"
+
 const SideBar = () => {
+  const { data: session } = useSession();
+
   return (
     <div className='flex flex-col gap-4 p-3'>
       <Link href='/'>
@@ -14,7 +19,11 @@ const SideBar = () => {
         <HiHome className='w-7 h-7 opacity-80' />
         <span className='font-bold hidden xl:inline w-fit'>Home</span>
       </Link>
-      <button className='bg-blue-400 text-white font-semibold rounded-full hover:brightness-95 transition-all duration-200 w-48 h-9 shadow-md hidden xl:inline'>Sign In</button>
+      {!session ? (
+        <button onClick={() => signIn()} className='bg-blue-400 text-white font-semibold rounded-full hover:brightness-95 transition-all duration-200 w-48 h-9 shadow-md hidden xl:inline'>Sign In</button>
+      ) : (
+        <button onClick={() => signOut({ callbackUrl: "/", redirect: true })} className='bg-blue-400 text-white font-semibold rounded-full hover:brightness-95 transition-all duration-200 w-48 h-9 shadow-md hidden xl:inline'>Sign Out</button>
+      )}
     </div>
   )
 }
