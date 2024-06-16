@@ -93,7 +93,7 @@ const MainPostInput = () => {
       />
       <div className='w-full divide-y divide-gray-200'>
         <textarea
-          className='w-full border-none outline-none tracking-wide min-h-[3rem] text-gray-700'
+          className='w-full border-none outline-none tracking-wide min-h-[3rem] py-2 text-gray-700'
           rows={2}
           placeholder={`How can we help, ${session.user.name.split(' ')[0]}?`}
           value={postText}
