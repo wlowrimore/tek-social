@@ -1,5 +1,6 @@
 import React from 'react'
 import MainPostInput from './components/MainPostInput'
+import Feed from './components/Feed'
 
 export default function page() {
   return (
@@ -9,6 +10,7 @@ export default function page() {
       </div>
       <div>
         <MainPostInput />
+        <Feed />
       </div>
     </div>
   )

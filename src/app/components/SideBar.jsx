@@ -11,7 +11,7 @@ const SideBar = () => {
   const { data: session } = useSession();
 
   return (
-    <div className='flex flex-col p-3 justify-between h-screen'>
+    <div className='flex flex-col p-3 justify-between min-h-screen'>
       <div className='flex flex-col gap-4'>
         <Link href='/'>
           <Image src={SiteLogo} alt='Site Logo' width={175} height={175} className='py-2 px-3 rounded-full hover:bg-gray-100 transition duration-200' />

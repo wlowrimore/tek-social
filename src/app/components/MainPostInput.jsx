@@ -68,7 +68,7 @@ const MainPostInput = () => {
       name: session.user.name,
       username: session.user.username,
       text: postText,
-      profileImg: imageFileUrl,
+      profileImg: session.user.image,
       image: imageFileUrl,
       timestamp: serverTimestamp(),
     })
@@ -76,6 +76,7 @@ const MainPostInput = () => {
     setPostText('');
     setSelectedFile(null);
     setImageFileUrl(null);
+    location.reload();
   }
 
   const loadingText = 'Uploading...';
