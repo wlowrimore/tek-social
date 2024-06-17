@@ -20,9 +20,9 @@ export default function Post({ post, id }) {
         </Link>
         <Link href={`/posts/${id}`} className='w-full h-[16rem]'>
           <img src={post?.image}
-            className='rounded-2xl mr-2 object-cover' />
+            className='rounded-2xl mr-2 object-cover max-h-[20rem]' />
         </Link>
-        <Icons />
+        <Icons id={id} />
       </div>
     </div>
   )
