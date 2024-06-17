@@ -6,7 +6,7 @@ import { doc, setDoc, getFirestore, serverTimestamp, onSnapshot, collection, del
 import { signIn, useSession } from 'next-auth/react';
 import { HiOutlineChat, HiOutlineHeart, HiHeart, HiOutlineTrash } from "react-icons/hi";
 
-export default function Icons({ id }) {
+export default function Icons({ id, uid }) {
   const { data: session } = useSession();
   const [isLiked, setIsLiked] = useState(false);
   const [likes, setLikes] = useState([]);
@@ -37,6 +37,21 @@ export default function Icons({ id }) {
     setIsLiked(likes.findIndex((like) => like.id === session?.user.uid) !== -1);
   }, [likes]);
 
+  const deletePost = async () => {
+    if (window.confirm('Are you sure you want to delete this post?')) {
+      if (session?.user?.id === uid) {
+        deleteDoc(doc(db, 'posts', id)).then(() => {
+          console.log("Post deleted successfully");
+          window.location.reload();
+        }).catch((error) => {
+          console.error("Error deleting post:", error);
+        })
+      } else {
+        alert("You are not authorized to delete this post");
+      }
+    }
+  }
+
   return (
     <div className='flex items-center p-2 gap-5 text-gray-500'>
       <HiOutlineChat
@@ -53,7 +68,10 @@ export default function Icons({ id }) {
         )}
         {likes.length > 0 && <span className={`text-xs ${isLiked && 'text-red-600'}`}>{likes.length}</span>}
       </div>
-      <HiOutlineTrash className='h-8 w-8 cursor-pointer rounded-full transition duration-300 ease-in-out p-2 hover:text-purple-500 hover:bg-purple-100' />
+
+      {session?.user?.uid === uid && (
+        <HiOutlineTrash onClick={deletePost} className='h-8 w-8 cursor-pointer rounded-full transition duration-300 ease-in-out p-2 hover:text-purple-500 hover:bg-purple-100' />
+      )}
     </div>
   )
 }

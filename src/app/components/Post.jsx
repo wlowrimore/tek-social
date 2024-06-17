@@ -4,6 +4,7 @@ import { HiDotsHorizontal } from "react-icons/hi";
 import Icons from './UI/Icons';
 
 export default function Post({ post, id }) {
+  console.log("Post UID:", post.uid)
   return (
     <div className='flex p-3 border-b border-gray-200 hover:opacity-80 transition duration-200'>
       <img src={post?.profileImg} alt='profile' className='h-11 w-11 rounded-full mr-4' />
@@ -22,7 +23,7 @@ export default function Post({ post, id }) {
           <img src={post?.image}
             className='rounded-2xl mr-2 object-cover max-h-[20rem]' />
         </Link>
-        <Icons id={id} />
+        <Icons id={id} uid={post?.uid} />
       </div>
     </div>
   )
