@@ -4,13 +4,15 @@ import Modal from 'react-modal'
 import { useRecoilState } from 'recoil'
 import { modalState, postIdState } from '../../atom/modalAtom'
 import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { HiX } from 'react-icons/hi'
 import { useState, useEffect } from 'react'
 import { app } from '../../firebase';
-import { getFirestore, doc, setDoc, serverTimestamp, onSnapshot } from 'firebase/firestore'
+import { getFirestore, doc, setDoc, serverTimestamp, onSnapshot, addDoc, collection } from 'firebase/firestore'
 
 export default function CommentModal() {
   const { data: session } = useSession()
+  const router = useRouter()
   const db = getFirestore(app);
   const [open, setOpen] = useRecoilState(modalState)
   const [input, setInput] = useState("");
@@ -31,7 +33,21 @@ export default function CommentModal() {
     }
   }, [postId])
 
-  const sendComment = async () => { };
+  const sendComment = async () => {
+    addDoc(collection(db, 'posts', postId, 'comments'), {
+      name: session.user.name,
+      username: session.user.username,
+      userImg: session.user.image,
+      comment: input,
+      timestamp: serverTimestamp(),
+    }).then(() => {
+      setInput("");
+      setOpen(false);
+      router.push(`/posts/${postId}`);
+    }).catch((error) => {
+      console.log("Error adding comment:", error);
+    })
+  };
 
   return (
     <div>
