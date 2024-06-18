@@ -18,7 +18,7 @@ export default function Comments({ id }) {
   return (
     <div>
       {comments.map((comment) => (
-        <CommentDetails key={comment.id} comment={comment} id={comment.id} />
+        <CommentDetails key={comment.id} comment={comment.data()} commentId={comment.id} originalPostId={id} />
       ))}
     </div>
   )
