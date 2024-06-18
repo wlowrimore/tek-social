@@ -12,10 +12,14 @@ const News = () => {
   useEffect(() => {
     const fetchNews = async () => {
       const data = await getTechNews();
-      setNews(data.articles);
+      console.log("NEWS DATA,", data)
+      setNews(data.results);
     }
     fetchNews();
   }, [])
+
+  const firstArticleWithMultimedia = Array.isArray(news) && news.find((article) => article.multimedia && article.multimedia.length > 0);
+
   return (
     <div className='text-gray-700 space-y-3 bg-gray-100 rounded-xl pt-2'>
       <h4 className='font-bold text-xl px-4'>The Latest in Tech News</h4>
@@ -25,11 +29,15 @@ const News = () => {
             <div className='flex items-center justify-between px-4 py-2 space-x-1 hover:bg-gray-200 transition-all duration-200'>
               <div className='space-y-0.5'>
                 <h6 className='text-sm font-bold'>{article.title}</h6>
-                <p className='text-xs font-medium text-gray-500'>{article.source.name}
-                  <span className='italic text-gray-500/80 text-[0.65rem]'>  &#40;{new Date(article.publishedAt).toLocaleString().split(',')[0]}&#41;</span></p>
+                <p className='text-xs font-medium text-gray-500'>{article.byline}
+                  <span className='italic text-gray-500/80 text-[0.65rem]'>  &#40;{new Date(article.published_date).toLocaleString().split(',')[0]}&#41;</span></p>
 
               </div>
-              <img src={article.urlToImage} alt='photo' width={70} className='rounded-xl' />
+              {firstArticleWithMultimedia && (
+                <Link href={firstArticleWithMultimedia.url} target='blank' rel='noopener noreferrer'>
+                  <img src={firstArticleWithMultimedia.multimedia[0].url} alt='photo' width={70} className='rounded-xl' />
+                </Link>
+              )}
             </div>
           </a>
         </div>
