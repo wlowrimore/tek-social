@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 const News = () => {
   const [news, setNews] = useState([]);
-  const [articleNum, setArticleNum] = useState(3);
+  const [articleNum, setArticleNum] = useState(5);
 
   useEffect(() => {
     const fetchNews = async () => {
