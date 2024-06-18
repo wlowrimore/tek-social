@@ -6,13 +6,14 @@ import { doc, setDoc, getFirestore, serverTimestamp, onSnapshot, collection, del
 import { signIn, useSession } from 'next-auth/react';
 import { HiOutlineChat, HiOutlineHeart, HiHeart, HiOutlineTrash } from "react-icons/hi";
 import { useRecoilState } from 'recoil';
-import { modalState } from '../../../atom/modalAtom';
+import { modalState, postIdState } from '../../../atom/modalAtom';
 
 export default function Icons({ id, uid }) {
   const { data: session } = useSession();
   const [isLiked, setIsLiked] = useState(false);
   const [likes, setLikes] = useState([]);
   const [open, setOpen] = useRecoilState(modalState)
+  const [postId, setPostId] = useRecoilState(postIdState);
   const db = getFirestore(app)
 
   const likePost = async () => {
@@ -42,8 +43,12 @@ export default function Icons({ id, uid }) {
 
   const toggleModal = (e) => {
     e.preventDefault();
-    console.log("Toggling Modal")
-    setOpen(!open);
+    if (!session) {
+      signIn();
+    } else {
+      setOpen(!open);
+      setPostId(id);
+    }
   }
 
   const deletePost = async () => {
