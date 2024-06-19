@@ -62,7 +62,8 @@ export default function Icons({ id, uid }) {
 
   const deletePost = async () => {
     if (window.confirm('Are you sure you want to delete this post?')) {
-      if (session?.user?.id === uid) {
+      if (session?.user?.uid === uid) {
+        console.log("TO DELETE UID", uid);
         deleteDoc(doc(db, 'posts', id)).then(() => {
           console.log("Post deleted successfully");
           window.location.reload();

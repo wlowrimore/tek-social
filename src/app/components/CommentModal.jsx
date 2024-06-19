@@ -49,6 +49,9 @@ export default function CommentModal() {
     })
   };
 
+  const postDate = new Date(post?.timestamp?.seconds * 1000).toLocaleString()
+  const formattedPostDate = postDate.split(', ')[0];
+
   return (
     <div>
       {open && (
@@ -71,7 +74,9 @@ export default function CommentModal() {
               </h4>
               <span className='text-sm sm:text-[0.9rem] truncate'>@{post?.username}</span>
             </div>
-            {post?.timestamp}
+            <div className='ml-[3.8rem] mt-[-1.25rem] mb-[0.5rem]'>
+              <p className='italic text-xs text-gray-700'>posted {formattedPostDate}</p>
+            </div>
             <p className='text-gray-500 sm:text-[1rem] text-[0.9rem] ml-[3.8rem] mb-2'>{post?.text}
             </p>
             <div className='flex p-3 space-x-3'>
@@ -87,7 +92,7 @@ export default function CommentModal() {
                   ></textarea>
                 </div>
                 <div className='w-full flex items-center justify-end pt-2.5'>
-                  <button className='bg-blue-400 text-white px-4 py-1.5 rounded-full font-bold shadow-md hover:brightness-95 disabled:opacity-50'
+                  <button className='bg-primaryRed text-white px-4 py-1.5 rounded-full font-bold shadow-md hover:opacity-80 transition duration-200 disabled:opacity-50'
                     disabled={!input.trim()}
                     onClick={sendComment}
                   >Comment</button>
@@ -99,6 +104,6 @@ export default function CommentModal() {
         </Modal>
       )
       }
-    </div >
+    </div>
   )
 }

@@ -14,7 +14,7 @@ const SideBar = () => {
     <div className='flex flex-col p-3 justify-between min-h-screen'>
       <div className='flex flex-col gap-4'>
         <Link href='/'>
-          <Image src={SiteLogo} alt='Site Logo' width={200} height={200} className='py-2 px-3 rounded-full hover:bg-gray-100 transition duration-200' />
+          <Image src={SiteLogo} alt='Site Logo' width={200} height={200} priority className='py-2 px-3 rounded-full hover:bg-gray-100 transition duration-200' />
         </Link>
         <Link href='/' className='flex items-center gap-2 py-2 px-3 rounded-full hover:text-primaryRed hover:bg-gray-100 transition duration-200'>
           <HiHome className='w-7 h-7' />
