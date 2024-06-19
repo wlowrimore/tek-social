@@ -79,7 +79,7 @@ export default function Icons({ id, uid }) {
     <div className='flex items-center p-2 gap-5 text-gray-500'>
       <div className='flex items-center'>
         <HiOutlineChat
-          className='h-8 w-8 cursor-pointer rounded-full transition duration-300 ease-in-out p-2 hover:text-sky-500 hover:bg-sky-100'
+          className='h-8 w-8 cursor-pointer rounded-full transition duration-300 ease-in-out p-2 hover:text-neutral-700 hover:bg-secondaryRed'
           onClick={toggleModal}
         />
         {comments.length > 0 && <span className='text-xs'>{comments.length}</span>}
@@ -88,7 +88,7 @@ export default function Icons({ id, uid }) {
         {isLiked ? (
           <HiHeart
             onClick={likePost}
-            className='h-8 w-8 cursor-pointer rounded-full transition duration-300 ease-in-out p-2 text-red-600 hover:text-rose-500 hover:bg-red-100' />
+            className='h-8 w-8 cursor-pointer rounded-full transition duration-300 ease-in-out p-2 text-primaryRed hover:text-red-500 hover:bg-secondarRed' />
         ) : (
           <HiOutlineHeart
             onClick={likePost}
@@ -98,7 +98,7 @@ export default function Icons({ id, uid }) {
       </div>
 
       {session?.user?.uid === uid && (
-        <HiOutlineTrash onClick={deletePost} className='h-8 w-8 cursor-pointer rounded-full transition duration-300 ease-in-out p-2 hover:text-purple-500 hover:bg-purple-100' />
+        <HiOutlineTrash onClick={deletePost} className='h-8 w-8 cursor-pointer rounded-full transition duration-300 ease-in-out p-2 hover:text-black hover:bg-neutral-400/20' />
       )}
     </div>
   )

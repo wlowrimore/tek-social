@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --primary-red: #890b11;
+    --secondary-red: #fddedf;
+    --primary-white: #ffffff;
+    --primary-black: #000000;
+  }
+}

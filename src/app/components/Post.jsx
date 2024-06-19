@@ -4,6 +4,9 @@ import { HiDotsHorizontal } from "react-icons/hi";
 import Icons from './UI/Icons';
 
 export default function Post({ post, id }) {
+  const postDate = new Date(post?.timestamp?.seconds * 1000).toLocaleString()
+  const formattedPostDate = postDate.split(', ')[0];
+
   return (
     <div className='flex p-3 border-b border-gray-200 hover:opacity-80 transition duration-200'>
       <img src={post?.profileImg} alt='profile' className='h-11 w-11 rounded-full mr-4' />
@@ -15,6 +18,7 @@ export default function Post({ post, id }) {
           </div>
           <HiDotsHorizontal className='text-gray-500' />
         </div>
+        <p className='italic text-xs text-gray-700'>original post on {formattedPostDate}</p>
         <Link href={`/posts/${id}`}>
           <p className='text-gray-800 text-sm my-3'>{post?.text}</p>
         </Link>

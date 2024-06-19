@@ -71,6 +71,7 @@ export default function CommentModal() {
               </h4>
               <span className='text-sm sm:text-[0.9rem] truncate'>@{post?.username}</span>
             </div>
+            {post?.timestamp}
             <p className='text-gray-500 sm:text-[1rem] text-[0.9rem] ml-[3.8rem] mb-2'>{post?.text}
             </p>
             <div className='flex p-3 space-x-3'>

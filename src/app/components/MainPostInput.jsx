@@ -107,11 +107,11 @@ const MainPostInput = () => {
             className={`w-full max-h-[16rem] object-cover cursor-pointer ${imageFileUploading ? 'animate-pulse' : ''}`} />
         )}
         <div className='flex items-center justify-between pt-2.5'>
-          <HiOutlinePhoto onClick={() => imagePickRef.current.click()} className='h-10 w-10 p-2 text-sky-500 hover:bg-sky-100 rounded-full cursor-pointer' />
+          <HiOutlinePhoto onClick={() => imagePickRef.current.click()} className='h-10 w-10 p-2 text-primaryRed hover:bg-secondaryRed hover:text-neutral-700 transition duration-200 rounded-full cursor-pointer' />
           <input type='file' ref={imagePickRef} accept='image/*' onChange={addImageToPost} hidden />
           <button
             disabled={postText.trim() === '' || postLoading || imageFileUploading}
-            className='bg-blue-400 text-white px-4 py-1.5 rounded-full font-bold shadow-md hover:brightness-95 disabled:opacity-50'
+            className='bg-primaryRed text-white px-4 py-1.5 rounded-full font-bold shadow-md hover:opacity-80 transition duration-200 disabled:opacity-50'
             onClick={handleSubmitPost}
           >Post
           </button>
