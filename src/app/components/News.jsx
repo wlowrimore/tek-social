@@ -8,6 +8,7 @@ import Image from 'next/image';
 const News = () => {
   const [news, setNews] = useState([]);
   const [articleNum, setArticleNum] = useState(5);
+  const [imageUrl, setImageUrl] = useState([]);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -18,7 +19,15 @@ const News = () => {
     fetchNews();
   }, [])
 
-  const firstArticleWithMultimedia = Array.isArray(news) && news.find((article) => article.multimedia && article.multimedia.length > 0);
+  useEffect(() => {
+    const cleanedUrl = news.map((article) => article?.multimedia?.[0]?.url.split(','));
+    console.log("CLEANED URL", cleanedUrl)
+  }, [news])
+
+
+
+
+
 
   return (
     <div className='text-gray-700 space-y-3 bg-gray-100 rounded-xl pt-2'>
@@ -33,11 +42,16 @@ const News = () => {
                   <span className='italic text-gray-500/80 text-[0.65rem]'>  &#40;{new Date(article.published_date).toLocaleString().split(',')[0]}&#41;</span></p>
 
               </div>
-              {firstArticleWithMultimedia && (
-                <Link href={firstArticleWithMultimedia.url} target='blank' rel='noopener noreferrer'>
-                  <img src={firstArticleWithMultimedia.multimedia[0].url} alt='photo' width={70} className='rounded-xl' />
+              <div className='flex items-center max-w-14 max-h-10'>
+                <Link href={article.url} target='_blank' rel='noreferrer noopener'>
+                  <Image
+                    src={article.multimedia[0]?.url}
+                    alt={article.title}
+                    width={100}
+                    height={100}
+                    className='rounded-2xl object-cover' />
                 </Link>
-              )}
+              </div>
             </div>
           </a>
         </div>

@@ -13,10 +13,11 @@ export const metadata = {
   description: "A social application where developers share their insight, knowledge, and experience of the technical interview process.",
 };
 
+export const dynamic = 'force-dynamic';
+
 export default function RootLayout({ children }) {
   return (
     <SessionWrapper>
-
       <html lang="en">
         <body className={inter.className}>
           <div className='flex justify-between max-w-7xl mx-auto'>
