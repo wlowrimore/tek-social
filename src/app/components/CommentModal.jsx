@@ -99,7 +99,6 @@ export default function CommentModal() {
                 </div>
               </div>
             </div>
-
           </div>
         </Modal>
       )

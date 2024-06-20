@@ -5,6 +5,8 @@ import SideBar from "./components/SideBar";
 import News from "./components/News";
 import SessionWrapper from "./components/SessionProvider";
 import CommentModal from "./components/CommentModal";
+import SearchInput from "./components/UI/SearchInput";
+import NewsModal from "./components/NewsModal";
 
 const manrope = Manrope({ subsets: ["latin"] });
 
@@ -29,7 +31,7 @@ export default function RootLayout({ children }) {
             </div>
             <div className='lg:flex-col p-3 h-screen border-l hidden lg:flex w-[24rem]'>
               <div className='sticky top-0 bg-white py-2'>
-                <input type='text' placeholder='Search' className='bg-gray-100 border border-gray-200 text-sm w-full rounded-3xl outline-none px-4 py-2' />
+                <SearchInput />
               </div>
               <News />
             </div>
