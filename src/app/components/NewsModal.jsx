@@ -7,7 +7,7 @@ import { HiX } from 'react-icons/hi'
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function NewsModal({ open, setOpen, searchResults, searchQuery }) {
+export default function NewsModal({ open, setOpen, searchResults, setSearchResults, searchQuery, setSearchQuery }) {
   const [articleNum, setArticleNum] = useState(5);
 
   const shortenedUrl = 'https://nytimes.com/';
@@ -22,6 +22,8 @@ export default function NewsModal({ open, setOpen, searchResults, searchQuery })
 
   function closeModal() {
     setOpen(false);
+    setSearchQuery('');
+    setSearchResults([]);
     setArticleNum(5);
   }
 
