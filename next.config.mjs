@@ -8,6 +8,10 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'nytimes.com',
+      },
+      {
+        protocol: 'https',
         hostname: 'lh3.googleusercontent.com'
       }
     ],

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRecoilState } from 'recoil'
-import { modalState } from '../../../atom/modalAtom'
+import { commentModalState } from '../../../atom/modalAtom'
 import { searchTechNews } from '../../utils/getTechNews';
 import Link from 'next/link';
 import NewsModal from '../NewsModal';
@@ -11,7 +11,7 @@ export default function SearchInput() {
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [errMsg, setErrMsg] = useState('');
-  const [open, setOpen] = useRecoilState(modalState)
+  const [open, setOpen] = useRecoilState(commentModalState)
 
   const handleChange = (e) => {
     setSearchQuery(e.target.value);
@@ -32,20 +32,23 @@ export default function SearchInput() {
 
       setErrMsg(error.message);
     }
+
+    setSearchQuery('');
+    setErrMsg('');
   }
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='w-full'>
         <input
           type='text'
           name='search'
           value={searchQuery}
           onChange={handleChange}
           placeholder='Search'
-          className='bg-gray-100 border border-gray-200 text-sm w-1/2 rounded-3xl outline-none px-4 py-2' />
+          className='bg-gray-100 border border-gray-200 text-sm w-full rounded-3xl outline-none px-4 py-2' />
       </form>
-      <NewsModal open={open} setOpen={setOpen} results={searchResults} />
+      <NewsModal open={open} setOpen={setOpen} searchResults={searchResults} searchQuery={searchQuery} />
     </>
   )
 }
