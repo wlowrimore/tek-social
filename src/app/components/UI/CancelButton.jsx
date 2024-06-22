@@ -6,7 +6,7 @@ const CancelBtn = () => {
     <div className="">
       <Link
         href="/"
-        className="text-lg font-semibold bg-primaryRed text-white rounded-full py-2.5 px-8 hover:opacity-80 transition duration-200"
+        className="text-lg font-semibold"
       >
         Cancel
       </Link>

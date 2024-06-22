@@ -14,13 +14,13 @@ const News = () => {
     const fetchNews = async () => {
       const data = await getTechNews();
       console.log("NEWS DATA,", data)
-      setNews(data.results);
+      setNews(data.results || []);
     }
     fetchNews();
   }, [])
 
   useEffect(() => {
-    const cleanedUrl = news.map((article) => article?.multimedia?.[0]?.url.split(','));
+    const cleanedUrl = news?.map((article) => article?.multimedia?.[0]?.url.split(','));
     console.log("CLEANED URL", cleanedUrl)
   }, [news])
 

@@ -2,12 +2,13 @@
 
 import Image from "next/image";
 import SiteLogo from '../../../public/images/site-logo-trans.webp'
-import SignInBtn from './UI/SignInButton'
+import GoogleSignInBtn from './UI/GoogleSignInButton'
+import LinkedInSignInBtn from './UI/LinkedInSignInButton'
 import CancelBtn from "./UI/CancelButton";
 
 const SignInComponent = () => {
   return (
-    <div className='mt-24 w-full flex flex-col items-center justify-center p-4'>
+    <div className='w-full flex flex-col items-center justify-center p-4'>
       <div className='py-4 w-full flex justify-center border-b border-gray-300'>
         <Image
           src={SiteLogo}
@@ -22,8 +23,11 @@ const SignInComponent = () => {
         <br />
         <p>We&apos;re here to help you navigate the tech interview landscape, and so are our members.  We try to make it as easy as possible to get going.  Just sign in below, and get started building your network!</p>
       </article>
-      <div className='w-full flex items-center justify-around px-4'>
-        <SignInBtn />
+      <div className='w-full flex flex-col items-center justify-around px-4'>
+        <div className='flex items-center space-x-4'>
+          <GoogleSignInBtn />
+          <LinkedInSignInBtn />
+        </div>
         <CancelBtn />
       </div>
     </div>
