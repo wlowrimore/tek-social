@@ -18,21 +18,18 @@ const SideBar = () => {
         </Link>
         <Link href='/' className='flex items-center gap-2 py-2 px-3 rounded-full hover:text-primaryRed hover:bg-gray-100 transition duration-200'>
           <HiHome className='w-7 h-7' />
-          <span className='font-bold hidden xl:inline w-fit'>Home</span>
+          <span className='font-bold hidden lg:inline w-fit'>Home</span>
         </Link>
         {!session ? (
           <Link href='/' className='flex items-center gap-2 py-2 px-3 rounded-full hover:text-primaryRed hover:bg-gray-100 transition duration-200'>
-            <HiUserAdd onClick={() => signIn()} className='w-8 h-8 xl:hidden' />
+            <HiUserAdd onClick={() => signIn()} className='w-8 h-8' />
+            <span className='font-bold hidden lg:inline w-fit'>Sign In</span>
           </Link>
         ) : (
           <Link href='/' className='flex items-center gap-2 py-2 px-3 rounded-full hover:text-primaryRed hover:bg-gray-100 transition duration-200'>
-            <HiUserRemove onClick={() => signOut({ callbackUrl: "/", redirect: true })} className='w-8 h-8 xl:hidden' />
+            <HiUserRemove onClick={() => signOut({ callbackUrl: "/", redirect: true })} className='w-8 h-8' />
+            <span className='font-bold hidden lg:inline w-fit'>Sign Out</span>
           </Link>
-        )}
-        {!session ? (
-          <button onClick={() => signIn()} className='bg-primaryRed text-white font-semibold rounded-full hover:bg-white hover:text-primaryRed transition-all duration-200 w-48 h-9 shadow-md hidden xl:inline'>Sign In</button>
-        ) : (
-          <button onClick={() => signOut({ callbackUrl: "/", redirect: true })} className='bg-primaryRed text-white font-semibold rounded-full hover:bg-white hover:text-primaryRed transition-all duration-200 w-48 h-9 shadow-md hidden xl:inline'>Sign Out</button>
         )}
       </div>
       {session && (
