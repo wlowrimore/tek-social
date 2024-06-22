@@ -5,6 +5,7 @@ import SiteLogo from '../../../public/images/site-logo-trans.webp'
 import GoogleSignInBtn from './UI/GoogleSignInButton'
 import LinkedInSignInBtn from './UI/LinkedInSignInButton'
 import CancelBtn from "./UI/CancelButton";
+import GitHubSignInBtn from "./UI/GitHubSignInButton";
 
 const SignInComponent = () => {
   return (
@@ -27,8 +28,8 @@ const SignInComponent = () => {
         <div className='flex items-center space-x-4'>
           <GoogleSignInBtn />
           <LinkedInSignInBtn />
+          <GitHubSignInBtn />
         </div>
-        <CancelBtn />
       </div>
     </div>
   );
