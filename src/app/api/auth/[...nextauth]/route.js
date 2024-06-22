@@ -9,7 +9,9 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-
+  pages: {
+    signIn: "/signIn",
+  },
   callbacks: {
     async session({ session, token }) {
       session.user.userFirstChar = session.user.name.slice(0, 1).toLocaleLowerCase();

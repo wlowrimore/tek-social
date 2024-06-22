@@ -4,7 +4,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { HiHome, HiDotsHorizontal } from "react-icons/hi";
+import { HiHome, HiDotsHorizontal, HiUserAdd, HiUserRemove } from "react-icons/hi";
 import SiteLogo from "../../../public/images/site-logo-trans.webp"
 
 const SideBar = () => {
@@ -20,6 +20,15 @@ const SideBar = () => {
           <HiHome className='w-7 h-7' />
           <span className='font-bold hidden xl:inline w-fit'>Home</span>
         </Link>
+        {!session ? (
+          <Link href='/' className='flex items-center gap-2 py-2 px-3 rounded-full hover:text-primaryRed hover:bg-gray-100 transition duration-200'>
+            <HiUserAdd onClick={() => signIn()} className='w-8 h-8 xl:hidden' />
+          </Link>
+        ) : (
+          <Link href='/' className='flex items-center gap-2 py-2 px-3 rounded-full hover:text-primaryRed hover:bg-gray-100 transition duration-200'>
+            <HiUserRemove onClick={() => signOut({ callbackUrl: "/", redirect: true })} className='w-8 h-8 xl:hidden' />
+          </Link>
+        )}
         {!session ? (
           <button onClick={() => signIn()} className='bg-primaryRed text-white font-semibold rounded-full hover:bg-white hover:text-primaryRed transition-all duration-200 w-48 h-9 shadow-md hidden xl:inline'>Sign In</button>
         ) : (
