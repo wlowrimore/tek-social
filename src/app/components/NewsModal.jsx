@@ -45,6 +45,7 @@ export default function NewsModal({ open, setOpen, searchResults, setSearchResul
                 <h4 className='text-gray-700 font-light px-10 mt-4 text-lg'>Showing Results for <span className='font-bold'>&quot;{searchQuery}&quot;</span></h4>
               )}
             </div>
+            {!searchResults.length && <p className='text-lg text-gray-700 p-4 text-center'>No Results Found</p>}
             <div className='py-3'>
               {searchResults.slice(0, articleNum)?.map((result, index) => (
                 <div key={result.web_url} className='px-11 py-1'>
