@@ -16,7 +16,7 @@ const GitHubSignInBtn = () => {
       />
       <button
         className="relative hover:opacity-40 transition duration-300 left-1.5 font-bold text-gray-700 text-2xl bg-white/20"
-        onClick={() => signIn("google", { callbackUrl: "/" })}
+        onClick={() => signIn("github", { callbackUrl: "/" })}
       >
         SignIn
       </button>

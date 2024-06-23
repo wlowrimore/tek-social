@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 
 import GoogleProvider from "next-auth/providers/google";
 import LinkedInProvider from "next-auth/providers/linkedin";
+import GitHubProvider from "next-auth/providers/github";
 
 const handler = NextAuth({
   providers: [
@@ -25,6 +26,10 @@ const handler = NextAuth({
         }
       }
     }),
+    GitHubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    })
   ],
 
   // debug: true,
