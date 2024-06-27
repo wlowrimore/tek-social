@@ -9,6 +9,11 @@ export const commentModalState = atom({
   default: false,
 })
 
+export const userProfileModalState = atom({
+  key: 'userProfileModalState',
+  default: false,
+})
+
 export const postIdState = atom({
   key: 'postIdState',
   default: "",

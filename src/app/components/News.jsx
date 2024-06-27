@@ -14,7 +14,7 @@ const News = () => {
     const fetchNews = async () => {
       const data = await getTechNews();
       console.log("NEWS DATA,", data)
-      setNews(data.results || []);
+      setNews(data?.results || []);
     }
     fetchNews();
   }, [])

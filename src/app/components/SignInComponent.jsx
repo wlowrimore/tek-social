@@ -3,7 +3,6 @@
 import Image from "next/image";
 import SiteLogo from '../../../public/images/site-logo-trans.webp'
 import GoogleSignInBtn from './UI/GoogleSignInButton'
-import LinkedInSignInBtn from './UI/LinkedInSignInButton'
 import CancelBtn from "./UI/CancelButton";
 import GitHubSignInBtn from "./UI/GitHubSignInButton";
 
@@ -27,11 +26,10 @@ const SignInComponent = () => {
       <div className='w-full flex flex-col items-center justify-around px-4'>
         <div className='flex items-center space-x-4'>
           <GoogleSignInBtn />
-          <LinkedInSignInBtn />
+          <CancelBtn />
           <GitHubSignInBtn />
         </div>
         <div>
-          <CancelBtn />
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@ const GitHubSignInBtn = () => {
         src={GitHubLogo}
         width={76}
         height={76}
-        alt="google logo"
+        alt="github logo"
         className="absolute py-2.5 pl-3 rounded-full opacity-60"
       />
       <button

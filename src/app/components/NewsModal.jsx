@@ -38,7 +38,7 @@ export default function NewsModal({ open, setOpen, searchResults, setSearchResul
         >
           <div className='pt-4'>
             <div className='border-b border-gray-200 py-2 px-1.5'>
-              <HiX className='text-2xl trct-gray-700 p-1 hover:bg-gray-200 rounded-full cursor-pointer'
+              <HiX className='text-2xl text-gray-700 p-1 hover:bg-gray-200 rounded-full cursor-pointer'
                 onClick={closeModal}
               />
               {searchQuery && (
