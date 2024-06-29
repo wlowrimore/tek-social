@@ -65,7 +65,7 @@ export default function ProfileDetailsForm({ setOpen, setDetailsOpen }) {
     console.log('User Details:', { userLocation, userSkills, bio, linkedInUrl, gitHubUrl, portfolioUrl, detailsComplete });
 
     if (!userLocation || userSkills.length > 5 || !bio || !linkedInUrl || !gitHubUrl || !portfolioUrl) {
-      console.log("Some fields are empty!")
+      setErrorMsg("Please provide your top 5 skills.")
       setDetailsComplete(false);
     } else {
       console.log("All fields are filled!")
@@ -93,13 +93,16 @@ export default function ProfileDetailsForm({ setOpen, setDetailsOpen }) {
           value={userLocation}
           onChange={handleInputChange}
           placeholder='Add Your Location' className='w-full p-2 outline-none border border-gray-300 bg-white mb-4' />
-
+        <p className='pl-2 text-xs italic font-semibold tracking-wide text-gray-500'>Separate skills with commas.</p>
         <input
           type='text'
           name='userSkills'
           value={userSkills}
           onChange={handleInputChange}
-          placeholder='Add Your Top 5 Skills' className='w-full p-2 outline-none border border-gray-300 bg-white rounded-lg mb-4' />
+          placeholder='Add Your Top 5 Skills'
+          className='w-full p-2 outline-none border border-gray-300 bg-white rounded-lg mb-4'
+        />
+
 
         <textarea
           maxLength={limit}

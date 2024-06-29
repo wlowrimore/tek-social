@@ -17,7 +17,7 @@ const SideBar = () => {
 
   const handleModalOpen = () => {
     setOpen(true);
-    console.log("OPEN", open)
+    console.log("User Session:", session)
   }
 
   return (
