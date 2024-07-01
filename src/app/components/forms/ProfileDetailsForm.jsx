@@ -48,6 +48,7 @@ export default function ProfileDetailsForm({ setOpen, setDetailsOpen }) {
     console.log("Fields:", { userLocation, userSkills, bio, linkedInUrl, gitHubUrl, portfolioUrl, detailsComplete });
 
     const docRef = await addDoc(collection(db, 'profile'), {
+      profileId: session.user.uid,
       uid: session.user.uid,
       name: session.user.name,
       email: session.user.email,
