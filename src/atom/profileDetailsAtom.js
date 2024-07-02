@@ -30,6 +30,11 @@ export const portfolioUrlInput = atom({
   default: ''
 })
 
+export const profileDetailsDataState = atom({
+  key: 'profileDetailsData',
+  default: {}
+})
+
 export const ProfileDetailsModalState = atom({
   key: 'profileDetailsModal',
   default: false
@@ -39,3 +44,4 @@ export const profileDetailsState = atom({
   key: 'detailsComplete',
   default: false
 })
+

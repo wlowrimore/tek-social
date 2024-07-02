@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,15 +9,74 @@ import { HiHome, HiDotsHorizontal, HiUserAdd, HiUserRemove } from "react-icons/h
 import SiteLogo from "../../../public/images/site-logo-trans.webp"
 import UserProfileModal from "../components/UserProfileModal"
 import { useRecoilState } from 'recoil'
-import { userProfileModalState } from '../../atom/modalAtom';
+import { userProfileModalState, } from '../../atom/modalAtom';
+import { profileDetailsState, profileDetailsDataState } from "../../atom/profileDetailsAtom";
 
 const SideBar = () => {
   const { data: session } = useSession();
   const [open, setOpen] = useRecoilState(userProfileModalState);
+  const [profileDetails] = useRecoilState(profileDetailsDataState);
+
+  const [profileDetailsInModal, setProfileDetailsInModal] = useState({
+    name: '',
+    bio: '',
+    location: '',
+    skills: [],
+    linkedInUrl: '',
+    gitHubUrl: '',
+    portfolioUrl: '',
+    detailsComplete: false,
+    image: '',
+    timestamp: '',
+    uid: '',
+    profileId: '',
+    email: '',
+    id: ''
+  });
+
+  useEffect(() => {
+    setProfileDetailsInModal({
+      name: profileDetails?.name,
+      bio: profileDetails?.bio,
+      location: profileDetails?.location,
+      skills: profileDetails?.skills,
+      linkedInUrl: profileDetails?.linkedInUrl,
+      gitHubUrl: profileDetails?.gitHubUrl,
+      portfolioUrl: profileDetails?.portfolioUrl,
+      detailsComplete: profileDetails?.detailsComplete,
+      image: profileDetails?.image,
+      timestamp: profileDetails?.timestamp,
+      uid: profileDetails?.uid,
+      profileId: profileDetails?.profileId,
+      email: profileDetails?.email,
+      id: profileDetails?.id
+    })
+  }, [profileDetails])
+
 
   const handleModalOpen = () => {
-    setOpen(true);
-    console.log("User Session:", session)
+    if (profileDetails) {
+      setOpen(true);
+      console.log("Profile Details In Modal:", profileDetails)
+      setProfileDetailsInModal({
+        name: profileDetails?.name || '',
+        bio: profileDetails?.bio || '',
+        location: profileDetails?.location || '',
+        skills: profileDetails?.skills || [],
+        linkedInUrl: profileDetails?.linkedInUrl || '',
+        gitHubUrl: profileDetails?.gitHubUrl || '',
+        portfolioUrl: profileDetails?.portfolioUrl || '',
+        detailsComplete: profileDetails?.detailsComplete || false,
+        image: profileDetails?.image || '',
+        timestamp: profileDetails?.timestamp || '',
+        uid: profileDetails?.uid || '',
+        profileId: profileDetails?.profileId || '',
+        email: profileDetails?.email || '',
+        id: profileDetails?.id || ''
+      })
+    } else {
+      console.log("No profile details found")
+    }
   }
 
   return (
@@ -58,7 +117,7 @@ const SideBar = () => {
           <HiDotsHorizontal className='h-5 xl:ml-8 hidden xl:inline' />
         </div>
       )}
-      <UserProfileModal open={open} setOpen={setOpen} />
+      <UserProfileModal open={open} setOpen={setOpen} profileDetailsInModal={profileDetailsInModal} />
     </div>
   )
 }
