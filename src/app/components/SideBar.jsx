@@ -19,8 +19,17 @@ const SideBar = () => {
   const [open, setOpen] = useRecoilState(userProfileModalState);
   const [profileDetails] = useRecoilState(profileDetailsDataState);
   const successMsgContent = useRecoilValue(profileSuccessMsgContentState)
+  const [isVisible, setIsVisible] = useState(false);
 
-
+  useEffect(() => {
+    if (successMsgContent) {
+      setIsVisible(true);
+      const timeoutId = setTimeout(() => {
+        setIsVisible(false);
+      }, 4000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [successMsgContent])
 
   const [profileDetailsInModal, setProfileDetailsInModal] = useState({
     name: '',
@@ -106,7 +115,7 @@ const SideBar = () => {
           </div>
         )}
       </div>
-      <div className='mt-6'>
+      <div className={`mt-6 ${isVisible ? 'block opacity-100' : 'block opacity-0'} transition-opacity duration-500`}>
         {successMsgContent && <p className='w-full bg-green-100 text-gray-800 font-bold rounded-lg p-2'>{successMsgContent}</p>}
       </div>
       {session && (
