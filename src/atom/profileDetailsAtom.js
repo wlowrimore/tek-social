@@ -45,3 +45,13 @@ export const profileDetailsState = atom({
   default: false
 })
 
+export const profileErrorMsgState = atom({
+  key: 'errorMsg',
+  default: ''
+})
+
+export const profileSuccessMsgState = atom({
+  key: 'successMsg',
+  default: false
+})
+

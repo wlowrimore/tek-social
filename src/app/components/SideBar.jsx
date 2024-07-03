@@ -1,5 +1,6 @@
 'use client';
 
+import { useRecoilValue } from 'recoil'
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
@@ -11,11 +12,15 @@ import UserProfileModal from "../components/UserProfileModal"
 import { useRecoilState } from 'recoil'
 import { userProfileModalState, } from '../../atom/modalAtom';
 import { profileDetailsState, profileDetailsDataState } from "../../atom/profileDetailsAtom";
+import { profileSuccessMsgContentState } from "../../atom/statusMessagesAtom";
 
 const SideBar = () => {
   const { data: session } = useSession();
   const [open, setOpen] = useRecoilState(userProfileModalState);
   const [profileDetails] = useRecoilState(profileDetailsDataState);
+  const successMsgContent = useRecoilValue(profileSuccessMsgContentState)
+
+
 
   const [profileDetailsInModal, setProfileDetailsInModal] = useState({
     name: '',
@@ -101,8 +106,11 @@ const SideBar = () => {
           </div>
         )}
       </div>
+      <div className='mt-6'>
+        {successMsgContent && <p className='w-full bg-green-100 text-gray-800 font-bold rounded-lg p-2'>{successMsgContent}</p>}
+      </div>
       {session && (
-        <div onClick={handleModalOpen} className='text-sm text-gray-700 flex items-center p-3 hover:bg-gray-100 transition-all duration-200 cursor-pointer rounded-full'>
+        <div onClick={handleModalOpen} className='text-sm text-gray-700 flex items-center p-3 hover:bg-gray-100 transition-all duration-200 cursor-pointer rounded-full mt-auto'>
           <Image
             src={session.user.image}
             alt={session.user.username}

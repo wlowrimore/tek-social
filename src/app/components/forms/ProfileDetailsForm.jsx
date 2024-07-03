@@ -4,15 +4,15 @@ import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { addDoc, collection, getFirestore, serverTimestamp } from 'firebase/firestore'
 import { app } from '../../../firebase'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import { userLocationInput, userSkillsInput, bioInput, linkedInUrlInput, gitHubUrlInput, portfolioUrlInput, profileDetailsState } from '../../../atom/profileDetailsAtom'
+import { profileSuccessMsgState, profileSuccessMsgContentState } from '../../../atom/statusMessagesAtom'
 
 export default function ProfileDetailsForm({ setOpen, setDetailsOpen }) {
   const { data: session } = useSession();
   const db = getFirestore(app);
 
   const [profileLoading, setProfileLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
   const [userLocation, setUserLocation] = useRecoilState(userLocationInput);
   const [userSkills, setUserSkills] = useRecoilState(userSkillsInput);
   const [bio, setBio] = useRecoilState(bioInput);
@@ -20,6 +20,9 @@ export default function ProfileDetailsForm({ setOpen, setDetailsOpen }) {
   const [gitHubUrl, setGitHubUrl] = useRecoilState(gitHubUrlInput);
   const [portfolioUrl, setPortfolioUrl] = useRecoilState(portfolioUrlInput);
   const [detailsComplete, setDetailsComplete] = useRecoilState(profileDetailsState);
+
+  const setProfileSuccessMsg = useSetRecoilState(profileSuccessMsgState);
+  const setProfileSuccessMsgContent = useSetRecoilState(profileSuccessMsgContentState);
 
   const limit = 2000;
   const handleInputChange = (e) => {
@@ -65,13 +68,10 @@ export default function ProfileDetailsForm({ setOpen, setDetailsOpen }) {
 
     console.log('User Details:', { userLocation, userSkills, bio, linkedInUrl, gitHubUrl, portfolioUrl, detailsComplete });
 
-    if (!userLocation || userSkills.length > 5 || !bio || !linkedInUrl || !gitHubUrl || !portfolioUrl) {
-      setErrorMsg("Please provide your top 5 skills.")
-      setDetailsComplete(false);
-    } else {
-      console.log("All fields are filled!")
-      setDetailsComplete(true);
-    }
+
+
+    setProfileSuccessMsg(true);
+    setProfileSuccessMsgContent("Profile submission successful!");
 
     setUserLocation('');
     setUserSkills([]);
