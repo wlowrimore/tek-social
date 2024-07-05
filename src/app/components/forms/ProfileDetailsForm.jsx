@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
-import { addDoc, collection, getFirestore, serverTimestamp } from 'firebase/firestore'
+import { addDoc, getDoc, setDoc, doc, updateDoc, collection, getFirestore, serverTimestamp } from 'firebase/firestore'
 import { app } from '../../../firebase'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { userLocationInput, userSkillsInput, bioInput, linkedInUrlInput, gitHubUrlInput, portfolioUrlInput, profileDetailsState } from '../../../atom/profileDetailsAtom'
@@ -48,30 +48,82 @@ export default function ProfileDetailsForm({ setOpen, setDetailsOpen }) {
     e.preventDefault();
     setProfileLoading(true);
 
-    console.log("Fields:", { userLocation, userSkills, bio, linkedInUrl, gitHubUrl, portfolioUrl, detailsComplete });
+    let isReadyForUpdate = userLocation || userSkills.length <= 5 || bio || linkedInUrl || gitHubUrl || portfolioUrl;
 
-    const docRef = await addDoc(collection(db, 'profile'), {
-      profileId: session.user.uid,
-      uid: session.user.uid,
-      name: session.user.name,
-      email: session.user.email,
-      skills: userSkills,
-      bio: bio,
-      image: session.user.image,
-      location: userLocation,
-      linkedInUrl: linkedInUrl,
-      gitHubUrl: gitHubUrl,
-      portfolioUrl: portfolioUrl,
-      timestamp: serverTimestamp(),
-      detailsComplete: detailsComplete
-    })
+    const profileRef = doc(db, 'profile', session.user.uid);
+    console.log("Profile Ref Just Before getDoc:", profileRef);
+    const profileSnap = await getDoc(profileRef);
 
-    console.log('User Details:', { userLocation, userSkills, bio, linkedInUrl, gitHubUrl, portfolioUrl, detailsComplete });
+    console.log("Profile Snapshot:", profileSnap.data());
 
+    if (isReadyForUpdate) {
+      const profileData = {
+        profileId: session.user.uid,
+        uid: session.user.uid,
+        name: session.user.name,
+        email: session.user.email,
+        skills: userSkills,
+        bio: bio,
+        image: session.user.image,
+        location: userLocation,
+        linkedInUrl: linkedInUrl,
+        gitHubUrl: gitHubUrl,
+        portfolioUrl: portfolioUrl,
+        timestamp: serverTimestamp(),
+        detailsComplete: true
+      }
 
+      console.log("Profile Data After profileData Definition:", profileData);
 
-    setProfileSuccessMsg(true);
-    setProfileSuccessMsgContent("Profile submission successful!");
+      if (profileSnap.exists()) {
+        console.log("Profile Snapshot:", profileSnap.data());
+        const existingData = profileSnap.data();
+        const updatedFields = {};
+
+        if (userLocation !== existingData.location) {
+          updatedFields.location = userLocation;
+        }
+
+        if (userSkills.length > 0) {
+          updatedFields.skills = userSkills;
+        }
+
+        if (bio && bio !== existingData.bio) {
+          updatedFields.bio = bio;
+        }
+
+        if (linkedInUrl && linkedInUrl !== existingData.linkedInUrl) {
+          updatedFields.linkedInUrl = linkedInUrl;
+        }
+
+        if (gitHubUrl && gitHubUrl !== existingData.gitHubUrl) {
+          updatedFields.gitHubUrl = gitHubUrl;
+        }
+
+        if (portfolioUrl && portfolioUrl !== existingData.portfolioUrl) {
+          updatedFields.portfolioUrl = portfolioUrl;
+        }
+
+        const updatedData = {
+          ...existingData,
+          ...updatedFields,
+          timestamp: serverTimestamp(),
+          detailsComplete: true
+        };
+
+        console.log("Profile Data Before Update:", updatedData);
+        await setDoc(profileRef, updatedData);
+      } else {
+        console.log("Profile Data Before Add:", profileData)
+        await setDoc(profileRef, profileData);
+      }
+
+      setDetailsComplete(true);
+      setProfileSuccessMsg(true);
+      setProfileSuccessMsgContent("Profile submission successful!")
+    } else {
+      setDetailsComplete(false);
+    }
 
     setUserLocation('');
     setUserSkills([]);
@@ -141,12 +193,21 @@ export default function ProfileDetailsForm({ setOpen, setDetailsOpen }) {
           value={portfolioUrl}
           onChange={handleInputChange}
           placeholder='Portfolio or Resume URL' className='w-full p-2 outline-none border border-gray-300 bg-white rounded-lg' />
+        {!detailsComplete && (
+          <button
+            type='submit'
+            className='bg-neutral-800 text-white text-lg font-bold p-2 my-6 rounded-lg mt-4 hover:bg-neutral-300 hover:text-gray-800 transition duration-200'>
+            Save Profile Details
+          </button>
+        )}
 
-        <button
-          type='submit'
-          className='bg-neutral-800 text-white text-lg font-bold p-2 my-6 rounded-lg mt-4 hover:bg-neutral-300 hover:text-gray-800 transition duration-200'>
-          Update and Save
-        </button>
+        {detailsComplete && (
+          <button
+            type='submit'
+            className='bg-neutral-800 text-white text-lg font-bold p-2 my-6 rounded-lg mt-4 hover:bg-neutral-300 hover:text-gray-800 transition duration-200'>
+            Update Profile Details
+          </button>
+        )}
       </form>
     </main>
   )

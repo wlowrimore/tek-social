@@ -76,7 +76,7 @@ export default function UserProfileDetails() {
                   <>
                     <p className='text-lg font-bold '>Top 5 Skills</p>
                     {topFiveSkills?.map((skill) => (
-                      <p key={skill} className='text-sm tracking-wider text-gray-800'>{skill}</p>
+                      <p key={skill} className='text-sm tracking-wider text-gray-800 font-semibold'>{skill}</p>
                     ))}
                   </>
                 ) : null}
