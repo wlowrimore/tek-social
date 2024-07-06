@@ -12,13 +12,14 @@ import UserProfileModal from "../components/UserProfileModal"
 import { useRecoilState } from 'recoil'
 import { userProfileModalState, } from '../../atom/modalAtom';
 import { profileDetailsState, profileDetailsDataState } from "../../atom/profileDetailsAtom";
-import { profileSuccessMsgContentState } from "../../atom/statusMessagesAtom";
+import { profileSuccessMsgContentState, profileUpdateSuccessMsgContentState } from "../../atom/statusMessagesAtom";
 
 const SideBar = () => {
   const { data: session } = useSession();
   const [open, setOpen] = useRecoilState(userProfileModalState);
   const [profileDetails] = useRecoilState(profileDetailsDataState);
   const successMsgContent = useRecoilValue(profileSuccessMsgContentState)
+  const updateSuccessMsgContent = useRecoilValue(profileUpdateSuccessMsgContentState)
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -30,6 +31,16 @@ const SideBar = () => {
       return () => clearTimeout(timeoutId);
     }
   }, [successMsgContent])
+
+  useEffect(() => {
+    if (updateSuccessMsgContent) {
+      setIsVisible(true);
+      const timeoutId = setTimeout(() => {
+        setIsVisible(false);
+      }, 4000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [updateSuccessMsgContent])
 
   const [profileDetailsInModal, setProfileDetailsInModal] = useState({
     name: '',
@@ -117,6 +128,9 @@ const SideBar = () => {
       </div>
       <div className={`mt-6 ${isVisible ? 'block opacity-100' : 'block opacity-0'} transition-opacity duration-500`}>
         {successMsgContent && <p className='w-full bg-green-100 text-gray-800 font-bold rounded-lg p-2'>{successMsgContent}</p>}
+      </div>
+      <div className={`mt-6 ${isVisible ? 'block opacity-100' : 'block opacity-0'} transition-opacity duration-500`}>
+        {updateSuccessMsgContent && <p className='w-full bg-blue-100 text-gray-800 font-bold rounded-lg p-2'>{updateSuccessMsgContent}</p>}
       </div>
       {session && (
         <div onClick={handleModalOpen} className='text-sm text-gray-700 flex items-center p-3 hover:bg-gray-100 transition-all duration-200 cursor-pointer rounded-full mt-auto'>

@@ -6,7 +6,7 @@ import { addDoc, getDoc, setDoc, doc, updateDoc, collection, getFirestore, serve
 import { app } from '../../../firebase'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { userLocationInput, userSkillsInput, bioInput, linkedInUrlInput, gitHubUrlInput, portfolioUrlInput, profileDetailsState } from '../../../atom/profileDetailsAtom'
-import { profileSuccessMsgState, profileSuccessMsgContentState } from '../../../atom/statusMessagesAtom'
+import { profileSuccessMsgState, profileSuccessMsgContentState, profileUpdateSuccessMsgState, profileUpdateSuccessMsgContentState } from '../../../atom/statusMessagesAtom'
 
 export default function ProfileDetailsForm({ setOpen, setDetailsOpen }) {
   const { data: session } = useSession();
@@ -23,6 +23,9 @@ export default function ProfileDetailsForm({ setOpen, setDetailsOpen }) {
 
   const setProfileSuccessMsg = useSetRecoilState(profileSuccessMsgState);
   const setProfileSuccessMsgContent = useSetRecoilState(profileSuccessMsgContentState);
+
+  const setProfileUpdateSuccessMsg = useSetRecoilState(profileUpdateSuccessMsgState);
+  const setProfileUpdateSuccessMsgContent = useSetRecoilState(profileUpdateSuccessMsgContentState);
 
   const limit = 2000;
   const handleInputChange = (e) => {
@@ -113,14 +116,17 @@ export default function ProfileDetailsForm({ setOpen, setDetailsOpen }) {
 
         console.log("Profile Data Before Update:", updatedData);
         await setDoc(profileRef, updatedData);
+        setDetailsComplete(true);
+        setProfileUpdateSuccessMsg(true);
+        setProfileUpdateSuccessMsgContent("Profile updated successfully!")
       } else {
         console.log("Profile Data Before Add:", profileData)
         await setDoc(profileRef, profileData);
+        setDetailsComplete(true);
+        setProfileSuccessMsg(true);
+        setProfileSuccessMsgContent("Profile added successfully!")
       }
 
-      setDetailsComplete(true);
-      setProfileSuccessMsg(true);
-      setProfileSuccessMsgContent("Profile submission successful!")
     } else {
       setDetailsComplete(false);
     }

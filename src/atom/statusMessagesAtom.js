@@ -10,6 +10,16 @@ export const profileSuccessMsgContentState = atom({
   default: ''
 })
 
+export const profileUpdateSuccessMsgState = atom({
+  key: 'profileUpdateSuccessMsg',
+  default: false
+})
+
+export const profileUpdateSuccessMsgContentState = atom({
+  key: 'profileUpdateSuccessMsgContent',
+  default: ''
+})
+
 export const profileErrorMsgState = atom({
   key: 'profileErrorMsg',
   default: false
