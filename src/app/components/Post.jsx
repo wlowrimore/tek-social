@@ -13,7 +13,6 @@ import PosterProfileModal from './PosterProfileModal';
 export default function Post({ post, id }) {
   const [showLink, setShowLink] = useState(false);
   const [open, setOpen] = useRecoilState(posterProfileModalState)
-  const [isLoading, setIsLoading] = useState(false)
 
   const { data: session } = useSession();
   console.log("SESSION DATA:", session)
@@ -27,14 +26,12 @@ export default function Post({ post, id }) {
 
   const handleModalOpen = (e) => {
     e.stopPropagation();
-    setIsLoading(true)
     const posterId = post?.uid
     if (posterId !== session?.user?.uid) {
       setOpen({
         true: true,
         posterId: posterId
       })
-      setIsLoading(false)
       setShowLink(false)
       console.log("POSTER ID AFTER 'IF' CONDITION:", posterId)
     } else {
