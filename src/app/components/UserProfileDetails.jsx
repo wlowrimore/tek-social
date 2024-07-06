@@ -31,7 +31,7 @@ export default function UserProfileDetails() {
     const q = query(collection(db, 'profile'), where('profileId', '==', uid ?? ''))
     const querySnapshot = await getDocs(q);
     const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
+    console.log("Data in fetchProfileFromDB:", data)
     return data[0]
   }
 
