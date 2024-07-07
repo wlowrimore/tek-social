@@ -5,7 +5,7 @@ import { useRecoilState } from 'recoil'
 import { posterProfileModalState } from '../../atom/modalAtom'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link';
-import { HiDotsHorizontal } from "react-icons/hi";
+import { HiDotsHorizontal, HiOutlineEye } from "react-icons/hi";
 import Icons from './UI/Icons';
 import PosterProfileDetails from './PosterProfileModal';
 import PosterProfileModal from './PosterProfileModal';
@@ -45,17 +45,22 @@ export default function Post({ post, id }) {
       <div className='flex-1'>
         <div className='flex items-center justify-between'>
           <div className='flex items-center space-x-1 whitespace-nowrap'>
-            <h4 className='font-bold text-sm truncate hover:underline cursor-pointer'>{post?.name}</h4>
+            <h4 onClick={handleModalOpen} className='font-bold text-sm truncate hover:underline cursor-pointer'>{post?.name}</h4>
             <span className='text-xs truncate'>@{post?.username}</span>
           </div>
-
-          <HiDotsHorizontal onClick={handleLinkText} className='relative w-8 text-gray-500 px-1 rounded-full hover:bg-secondaryRed cursor-pointer' />
-        </div>
-        {showLink && (
-          <div className='absolute left-[54%] w-fit h-fit bg-white rounded shadow'>
-            <p onClick={(e) => handleModalOpen(e)} className='text-sm py-1 px-2 cursor-pointer hover:text-primaryRed'>View Profile</p>
+          <div className='relative w-1/2'>
+            {session?.user?.uid !== post?.uid && (
+              <div className='flex justify-end'>
+                <HiOutlineEye onClick={handleLinkText} className='relative w-8 text-gray-500 px-1 rounded-full hover:bg-secondaryRed cursor-pointer' />
+              </div>
+            )}
+            {showLink && (
+              <div className='absolute w-fit right-0 bg-white rounded shadow'>
+                <p onClick={(e) => handleModalOpen(e)} className='w-full text-sm py-1 px-2 cursor-pointer hover:text-primaryRed'>View Profile</p>
+              </div>
+            )}
           </div>
-        )}
+        </div>
         <PosterProfileModal open={open} setOpen={setOpen} posterId={open?.posterId} />
         <p className='italic text-xs text-gray-700'>original post on {formattedPostDate}</p>
         <Link href={`/posts/${id}`}>

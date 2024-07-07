@@ -92,7 +92,7 @@ export default function PosterProfileDetails({ posterId }) {
                     ) : null}
                     {creatorProfile?.profileDetails?.bio ? (
                       <div className='leading-5 mb-4'>
-                        <h3 className='text-lg font-bold'>About me</h3>
+                        <h3 className='text-lg font-bold'>Get to know me</h3>
                         <p className=' text-gray-800 tracking-wide'>{creatorProfile?.profileDetails?.bio}</p>
                       </div>
                     ) : (
@@ -127,7 +127,7 @@ export default function PosterProfileDetails({ posterId }) {
             </div>
           ) : (
             <div>
-              <p>No User Logged In</p>
+              {isLoading ? <p>Loading...</p> : <p>No profile found</p>}
             </div>
           )}
         </div>

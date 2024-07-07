@@ -8,7 +8,7 @@ import { addDoc, collection, getFirestore, serverTimestamp } from 'firebase/fire
 
 import Image from 'next/image'
 
-import { HiOutlinePhoto } from "react-icons/hi2";
+import { HiOutlinePhoto, HiOutlineLink } from "react-icons/hi2";
 const MainPostInput = () => {
   const { data: session } = useSession()
   const [imageFileUrl, setImageFileUrl] = useState(null)
@@ -107,8 +107,15 @@ const MainPostInput = () => {
             className={`w-full max-h-[16rem] object-cover cursor-pointer ${imageFileUploading ? 'animate-pulse' : ''}`} />
         )}
         <div className='flex items-center justify-between pt-2.5'>
-          <HiOutlinePhoto onClick={() => imagePickRef.current.click()} className='h-10 w-10 p-2 text-primaryRed hover:bg-secondaryRed hover:text-neutral-700 transition duration-200 rounded-full cursor-pointer' />
-          <input type='file' ref={imagePickRef} accept='image/*' onChange={addImageToPost} hidden />
+          <div className='flex items-center'>
+            <div title="Add An Image">
+              <HiOutlinePhoto onClick={() => imagePickRef.current.click()} className='h-10 w-10 p-2 text-primaryRed hover:bg-secondaryRed hover:text-neutral-700 transition duration-200 rounded-full cursor-pointer' />
+              <input type='file' ref={imagePickRef} accept='image/*' onChange={addImageToPost} hidden />
+            </div>
+            {/* <div title='Share A Link'>
+              <HiOutlineLink className='h-9 w-9 p-2 text-primaryRed hover:bg-secondaryRed hover:text-neutral-700 transition duration-200 rounded-full cursor-pointer' />
+            </div> */}
+          </div>
           <button
             disabled={postText.trim() === '' || postLoading || imageFileUploading}
             className='px-4 py-1 text-primaryRed font-bold hover:bg-secondaryRed hover:text-neutral-700 rounded-md transition duration-200 disabled:opacity-50'
