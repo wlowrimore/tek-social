@@ -3,15 +3,17 @@
 import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { posterProfileModalState } from '../../atom/modalAtom'
-import { useSession } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link';
 import { HiDotsHorizontal, HiOutlineEye } from "react-icons/hi";
 import Icons from './UI/Icons';
 import PosterProfileDetails from './PosterProfileModal';
 import PosterProfileModal from './PosterProfileModal';
+import ImageModal from './ImageModal';
 
 export default function Post({ post, id }) {
   const [showLink, setShowLink] = useState(false);
+  const [imgModalOpen, setImgModalOpen] = useState(false);
   const [open, setOpen] = useRecoilState(posterProfileModalState)
 
   const { data: session } = useSession();
@@ -36,6 +38,14 @@ export default function Post({ post, id }) {
       console.log("POSTER ID AFTER 'IF' CONDITION:", posterId)
     } else {
       console.log("Profile ID is same as session user ID")
+    }
+  }
+
+  const handleImgClick = () => {
+    if (session) {
+      setImgModalOpen(!imgModalOpen)
+    } else {
+      signIn();
     }
   }
 
@@ -66,10 +76,11 @@ export default function Post({ post, id }) {
         <Link href={`/posts/${id}`}>
           <p className='text-gray-800 text-sm my-3'>{post?.text}</p>
         </Link>
-        <Link href={`/posts/${id}`} className='w-full h-[16rem]'>
+        <ImageModal open={imgModalOpen} setOpen={setImgModalOpen} src={post?.image} />
+        <div onClick={handleImgClick} className='w-full h-[16rem]'>
           <img src={post?.image}
-            className='rounded-2xl mr-2 object-cover max-h-[20rem]' />
-        </Link>
+            className='rounded-2xl mr-2 object-cover max-h-[19rem]' />
+        </div>
         <Icons id={id} uid={post?.uid} />
       </div>
     </div>

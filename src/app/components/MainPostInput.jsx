@@ -118,7 +118,7 @@ const MainPostInput = () => {
           </div>
           <button
             disabled={postText.trim() === '' || postLoading || imageFileUploading}
-            className='px-4 py-1 text-primaryRed font-bold hover:bg-secondaryRed hover:text-neutral-700 rounded-md transition duration-200 disabled:opacity-50'
+            className='px-4 py-1 text-primaryRed font-bold hover:bg-secondaryRed hover:text-neutral-700 rounded-md transition duration-200 disabled:opacity-50 cursor-pointer'
             onClick={handleSubmitPost}
           >Post
           </button>

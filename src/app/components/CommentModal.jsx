@@ -92,7 +92,7 @@ export default function CommentModal() {
                   ></textarea>
                 </div>
                 <div className='w-full flex items-center justify-end pt-2.5'>
-                  <button className='bg-primaryRed text-white px-4 py-1.5 rounded-full font-bold shadow-md hover:opacity-80 transition duration-200 disabled:opacity-50'
+                  <button className='px-4 py-1 text-primaryRed font-bold hover:bg-secondaryRed hover:text-neutral-700 rounded-md transition duration-200 disabled:opacity-50 cursor-pointer'
                     disabled={!input.trim()}
                     onClick={sendComment}
                   >Comment</button>
