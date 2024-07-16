@@ -21,7 +21,7 @@ const News = () => {
 
   useEffect(() => {
     const cleanedUrl = news?.map((article) => article?.multimedia?.[0]?.url.split(','));
-    console.log("CLEANED URL", cleanedUrl)
+    // console.log("CLEANED URL", cleanedUrl)
   }, [news])
 
   return (

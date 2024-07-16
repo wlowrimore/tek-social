@@ -1,6 +1,7 @@
 import { collection, getDocs, getFirestore, orderBy, query } from 'firebase/firestore'
 import { app } from '../../firebase'
 import Post from './Post'
+import CommentModal from './CommentModal';
 
 export default async function Feed() {
   const db = getFirestore(app)
@@ -16,6 +17,7 @@ export default async function Feed() {
       {data.map((post) => (
         <Post key={post.id} post={post} id={post.id} />
       ))}
+      <CommentModal />
     </div>
   )
 }

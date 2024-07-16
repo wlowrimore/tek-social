@@ -17,7 +17,7 @@ export default function Post({ post, id }) {
   const [open, setOpen] = useRecoilState(posterProfileModalState)
 
   const { data: session } = useSession();
-  console.log("SESSION DATA:", session)
+  // console.log("SESSION DATA:", session)
 
   const postDate = new Date(post?.timestamp?.seconds * 1000).toLocaleString()
   const formattedPostDate = postDate.split(', ')[0];
@@ -79,7 +79,7 @@ export default function Post({ post, id }) {
         <ImageModal open={imgModalOpen} setOpen={setImgModalOpen} src={post?.image} />
         <div onClick={handleImgClick} className='w-full h-[16rem]'>
           <img src={post?.image}
-            className='rounded-2xl mr-2 object-cover max-h-[19rem]' />
+            className='rounded-2xl mr-2 object-cover max-h-[19rem] cursor-pointer' />
         </div>
         <Icons id={id} uid={post?.uid} />
       </div>

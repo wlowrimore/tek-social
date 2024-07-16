@@ -7,7 +7,7 @@ export default function SmallScreenAuthLinks() {
   const { data: session } = useSession();
 
   return (
-    <div className='inline sm:hidden items-center w-full'>
+    <div className='flex flex-col items-center w-full'>
       {!session ? (
         <div className='flex items-center rounded-full hover:text-primaryRed hover:bg-PrimaryRed cursor-pointer transition duration-200'>
           <h3 onClick={() => signIn()} className='w-fit h-auto font-bold'>Sign In</h3>

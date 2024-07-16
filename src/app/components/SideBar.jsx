@@ -1,21 +1,24 @@
 'use client';
 
 import { useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
+
 import Image from "next/image";
 import Link from "next/link";
-
 import { HiHome, HiDotsHorizontal, HiUserAdd, HiUserRemove } from "react-icons/hi";
 import SiteLogo from "../../../public/images/site-logo-trans.webp"
 import UserProfileModal from "../components/UserProfileModal"
-import { useRecoilState } from 'recoil'
 import { userProfileModalState, } from '../../atom/modalAtom';
 import { profileDetailsState, profileDetailsDataState } from "../../atom/profileDetailsAtom";
 import { profileSuccessMsgContentState, profileUpdateSuccessMsgContentState } from "../../atom/statusMessagesAtom";
+import { ThemeSwitcher } from './UI/ThemeSwitcher';
+import SmallScreenAuthLinks from './UI/SmallScreenAuthLinks';
 
 const SideBar = () => {
   const { data: session } = useSession();
+
   const [open, setOpen] = useRecoilState(userProfileModalState);
   const [profileDetails] = useRecoilState(profileDetailsDataState);
   const successMsgContent = useRecoilValue(profileSuccessMsgContentState)
@@ -125,6 +128,7 @@ const SideBar = () => {
             <span className='font-bold hidden lg:inline w-fit'>Sign Out</span>
           </div>
         )}
+        {/* <SmallScreenAuthLinks /> */}
       </div>
       <div className={`mt-6 ${isVisible ? 'block opacity-100' : 'block opacity-0'} transition-opacity duration-500`}>
         {successMsgContent && <p className='w-full bg-green-100 text-gray-800 font-bold rounded-lg p-2'>{successMsgContent}</p>}
@@ -132,6 +136,7 @@ const SideBar = () => {
       <div className={`mt-6 ${isVisible ? 'block opacity-100' : 'block opacity-0'} transition-opacity duration-500`}>
         {updateSuccessMsgContent && <p className='w-full bg-blue-100 text-gray-800 font-bold rounded-lg p-2'>{updateSuccessMsgContent}</p>}
       </div>
+      <ThemeSwitcher />
       {session && (
         <div onClick={handleModalOpen} className='text-sm text-gray-700 flex items-center p-3 hover:bg-gray-100 transition-all duration-200 cursor-pointer rounded-full mt-auto'>
           <Image
