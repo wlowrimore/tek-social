@@ -10,3 +10,7 @@
     --primary-black: #000000;
   }
 }
+
+::-webkit-scrollbar {
+  display: none;
+}

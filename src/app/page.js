@@ -3,11 +3,13 @@ import MainPostInput from './components/MainPostInput'
 import Feed from './components/Feed'
 import SideBar from './components/SideBar'
 import SmallScreenAuthLinks from './components/UI/SmallScreenAuthLinks'
+import SearchInput from './components/UI/SearchInput'
+import News from './components/News'
 
 export default function page() {
   return (
     // <div className='max-w-xl mx-auto border-l border-r min-h-screen'>
-    <div className='flex justify-between max-w-7xl mx-auto'>
+    <div className='flex max-w-7xl mx-auto'>
       <div className='hidden sm:inline border-r h-screen sticky bottom-0 top-0'>
         <SideBar />
       </div>
@@ -16,10 +18,16 @@ export default function page() {
           <SmallScreenAuthLinks />
         </div>
       </div> */}
-      <div className='border border-r h-screen overflow-y-scroll'>
+      <div className='border border-r h-screen w-full overflow-y-scroll'>
         {/* <h2 className='bg-white text-lg sm:text-xl font-bold'>Home</h2> */}
         <MainPostInput />
         <Feed />
+      </div>
+      <div className='lg:flex-col p-3 h-screen border-l hidden lg:flex w-[52rem]'>
+        <div className='sticky top-0 pb-1'>
+          <SearchInput />
+        </div>
+        <News />
       </div>
     </div>
   )

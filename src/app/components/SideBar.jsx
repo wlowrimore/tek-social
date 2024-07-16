@@ -108,10 +108,10 @@ const SideBar = () => {
   }
 
   return (
-    <div className='flex flex-col p-3 justify-between min-h-screen'>
+    <div className='flex flex-col p-3 min-w-[15rem] min-h-screen'>
       <div className='flex flex-col gap-4'>
         <Link href='/'>
-          <Image src={SiteLogo} alt='Site Logo' width={200} height={200} priority className='py-2 px-3 rounded-full hover:bg-gray-100 transition duration-200' />
+          <Image src={SiteLogo} alt='Site Logo' width={200} height={200} priority className='py-2 px-3 rounded-full hover:bg-gray-100 dark:bg-gray-100 transition duration-200' />
         </Link>
         <Link href='/' className='flex items-center gap-2 py-2 px-3 rounded-full hover:text-primaryRed hover:bg-gray-100 transition duration-200'>
           <HiHome className='w-7 h-7' />
@@ -138,7 +138,7 @@ const SideBar = () => {
       </div>
       <ThemeSwitcher />
       {session && (
-        <div onClick={handleModalOpen} className='text-sm text-gray-700 flex items-center p-3 hover:bg-gray-100 transition-all duration-200 cursor-pointer rounded-full mt-auto'>
+        <div onClick={handleModalOpen} className='text-sm text-gray-700 flex items-center p-3 hover:bg-gray-100 dark:hover:bg-neutral-700/70 transition-all duration-200 cursor-pointer rounded-full mt-auto'>
           <Image
             src={session.user.image}
             alt={session.user.username}
@@ -147,10 +147,10 @@ const SideBar = () => {
             className='rounded-full w-10 h-10 xl:mr-2'
           />
           <div className='hidden xl:inline'>
-            <h4 className='text-sm font-bold'>{session.user.name}</h4>
-            <p className='text-xs text-gray-500'>@{session.user.username}</p>
+            <h4 className='text-sm text-gray-800 dark:text-gray-200 font-bold'>{session.user.name}</h4>
+            <p className='text-xs text-gray-500 dark:text-gray-400'>@{session.user.username}</p>
           </div>
-          <HiDotsHorizontal className='h-5 xl:ml-8 hidden xl:inline' />
+          <HiDotsHorizontal className='h-5 xl:ml-8 hidden xl:inline dark:text-gray-200' />
         </div>
       )}
       <UserProfileModal open={open} setOpen={setOpen} profileDetailsInModal={profileDetailsInModal} />
