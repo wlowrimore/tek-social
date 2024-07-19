@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil'
 import { useRecoilState } from 'recoil'
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
-
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
 import { HiHome, HiDotsHorizontal, HiUserAdd, HiUserRemove } from "react-icons/hi";
@@ -14,7 +14,6 @@ import { userProfileModalState, } from '../../atom/modalAtom';
 import { profileDetailsState, profileDetailsDataState } from "../../atom/profileDetailsAtom";
 import { profileSuccessMsgContentState, profileUpdateSuccessMsgContentState } from "../../atom/statusMessagesAtom";
 import { ThemeSwitcher } from './UI/ThemeSwitcher';
-import SmallScreenAuthLinks from './UI/SmallScreenAuthLinks';
 
 const SideBar = () => {
   const { data: session } = useSession();
@@ -24,6 +23,9 @@ const SideBar = () => {
   const successMsgContent = useRecoilValue(profileSuccessMsgContentState)
   const updateSuccessMsgContent = useRecoilValue(profileUpdateSuccessMsgContentState)
   const [isVisible, setIsVisible] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     if (successMsgContent) {
@@ -107,28 +109,40 @@ const SideBar = () => {
     }
   }
 
+  const toggleTheme = () => {
+    setIsAnimating(true);
+    setTimeout(() => {
+      setIsAnimating(false);
+      setTheme(theme === 'light' ? 'dark' : 'light');
+    }, 200);
+  }
+
   return (
-    <div className='flex flex-col p-3 min-w-[15rem] min-h-screen'>
+    <div className='flex flex-col py-5 px-8 min-w-[18rem] min-h-screen'>
       <div className='flex flex-col gap-4'>
         <Link href='/'>
-          <Image src={SiteLogo} alt='Site Logo' width={200} height={200} priority className='py-2 px-3 rounded-full hover:bg-gray-100 dark:bg-gray-100 transition duration-200' />
+          <Image src={SiteLogo} alt='Site Logo' width={200} height={200} priority className='w-full py-2 px-3 rounded hover:bg-gray-100 dark:bg-gray-100 transition duration-200' />
         </Link>
-        <Link href='/' className='flex items-center gap-2 py-2 px-3 rounded-full hover:text-primaryRed hover:bg-gray-100 transition duration-200'>
+        <Link href='/' className='flex items-center gap-3 py-2 px-3 rounded hover:text-primaryRed hover:bg-gray-100 transition duration-200'>
           <HiHome className='w-7 h-7' />
           <span className='font-bold hidden lg:inline w-fit'>Home</span>
         </Link>
         {!session ? (
-          <div onClick={() => signIn()} className='flex items-center gap-2 cursor-pointer py-2 px-3 rounded-full hover:text-primaryRed hover:bg-gray-100 transition duration-200'>
+          <div onClick={() => signIn()} className='flex items-center gap-2 cursor-pointer py-2 px-3 rounded hover:text-primaryRed hover:bg-gray-100 transition duration-200'>
             <HiUserAdd className='w-8 h-8' />
             <span className='font-bold hidden lg:inline w-fit'>Sign In</span>
           </div>
         ) : (
-          <div onClick={() => signOut({ callbackUrl: "/", redirect: true })} className='flex items-center gap-2 cursor-pointer py-2 px-3 rounded-full hover:text-primaryRed hover:bg-gray-100 transition duration-200'>
+          <div onClick={() => signOut({ callbackUrl: "/", redirect: true })} className='flex items-center gap-2 cursor-pointer py-2 px-3 rounded hover:text-primaryRed hover:bg-gray-100 transition duration-200'>
             <HiUserRemove className='w-8 h-8' />
             <span className='font-bold hidden lg:inline w-fit'>Sign Out</span>
           </div>
         )}
-        {/* <SmallScreenAuthLinks /> */}
+      </div>
+      <div onClick={toggleTheme} className={`mt-4 theme-icon flex items-center p-3 rounded hover:text-primaryRed hover:bg-gray-100 transition duration-200 ${isHovered ? 'hovered' : ''}`}
+        onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+        <ThemeSwitcher toggleTheme={toggleTheme} isAnimating={isAnimating} theme={theme} />
+        <span className='font-bold hidden lg:inline w-fit cursor-pointer'>Switch Theme</span>
       </div>
       <div className={`mt-6 ${isVisible ? 'block opacity-100' : 'block opacity-0'} transition-opacity duration-500`}>
         {successMsgContent && <p className='w-full bg-green-100 text-gray-800 font-bold rounded-lg p-2'>{successMsgContent}</p>}
@@ -136,7 +150,7 @@ const SideBar = () => {
       <div className={`mt-6 ${isVisible ? 'block opacity-100' : 'block opacity-0'} transition-opacity duration-500`}>
         {updateSuccessMsgContent && <p className='w-full bg-blue-100 text-gray-800 font-bold rounded-lg p-2'>{updateSuccessMsgContent}</p>}
       </div>
-      <ThemeSwitcher />
+
       {session && (
         <div onClick={handleModalOpen} className='text-sm text-gray-700 flex items-center p-3 hover:bg-gray-100 dark:hover:bg-neutral-700/70 transition-all duration-200 cursor-pointer rounded-full mt-auto'>
           <Image

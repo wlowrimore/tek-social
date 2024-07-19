@@ -85,7 +85,9 @@ const MainPostInput = () => {
   if (!session) return null
   return (
     <>
-      <h2 className='text-xl hidden md:inline-flex font-bold h-[3rem] p-3'>Home</h2>
+      <div className='text-xl hidden md:inline font-bold'>
+        <h2 className='p-3'>Home</h2>
+      </div>
       <div className='flex items-center justify-between p-3 sm:hidden'>
         <h2 className='text-lg sm:text-xl font-bold'>Home</h2>
         {!session ? (
