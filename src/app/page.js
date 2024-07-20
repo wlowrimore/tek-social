@@ -18,13 +18,13 @@ export default function page() {
           <SmallScreenAuthLinks />
         </div>
       </div> */}
-      <div className='border border-r dark:border-none h-screen w-full overflow-y-scroll'>
+      <div className='border border-r dark:border-none h-screen w-full overflow-y-scroll mx-10'>
         {/* <h2 className='bg-white text-lg sm:text-xl font-bold'>Home</h2> */}
         <MainPostInput />
         <Feed />
       </div>
-      <div className='lg:flex-col p-3 h-screen border-l dark:border-none hidden lg:flex w-[52rem]'>
-        <div className='sticky top-0 pb-1'>
+      <div className='lg:flex-col py-14 h-screen border-l dark:border-none hidden lg:flex w-[52rem]'>
+        <div className='sticky top-0 pb-1 w-full px-3'>
           <SearchInput />
         </div>
         <News />

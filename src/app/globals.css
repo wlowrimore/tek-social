@@ -15,11 +15,10 @@
   display: none;
 }
 
-.theme-icon.hovered .sun-icon,
 .theme-icon.hovered .moon-icon {
   color: var(--primary-red);
 }
 
-.theme-icon.hovered span {
+/* .theme-icon.hovered span {
   color: var(--primary-red);
-}
+} */

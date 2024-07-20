@@ -70,7 +70,7 @@ export default function PosterProfileDetails({ posterId }) {
                   <div className='flex flex-col px-3'>
                     {topFiveSkills ? (
                       <>
-                        <p className='text-lg font-bold '>Top 5 Skills</p>
+                        <p className='text-lg dark:text-neutral-800 font-bold '>Top 5 Skills</p>
                         {topFiveSkills?.map((skill) => (
                           <p key={skill} className='text-sm tracking-wider text-gray-800 font-semibold'>{skill}</p>
                         ))}
@@ -80,19 +80,19 @@ export default function PosterProfileDetails({ posterId }) {
                 </div>
                 <div className='flex flex-col'>
                   <div className='mb-4'>
-                    <p className='text-2xl font-bold tracking-wide'>{creatorProfile?.profileDetails?.name}</p>
+                    <p className='text-2xl dark:text-neutral-800 font-bold tracking-wide'>{creatorProfile?.profileDetails?.name}</p>
                     <p className='text-sm text-gray-600'>{creatorProfile?.profileDetails?.email}</p>
                   </div>
                   <>
                     {creatorProfile?.profileDetails?.location ? (
                       <div className='mb-4'>
-                        <h3 className='text-lg font-bold'>Location</h3>
+                        <h3 className='text-lg dark:text-neutral-800 font-bold'>Location</h3>
                         <p className='text-gray-600'>{creatorProfile.profileDetails?.location}</p>
                       </div>
                     ) : null}
                     {creatorProfile?.profileDetails?.bio ? (
                       <div className='leading-5 mb-4'>
-                        <h3 className='text-lg font-bold'>Get to know me</h3>
+                        <h3 className='text-lg dark:text-neutral-800 font-bold'>Get to know me</h3>
                         <p className=' text-gray-800 tracking-wide'>{creatorProfile?.profileDetails?.bio}</p>
                       </div>
                     ) : (
@@ -100,24 +100,24 @@ export default function PosterProfileDetails({ posterId }) {
                     )}
                     {creatorProfile?.profileDetails.gitHubUrl || creatorProfile?.profileDetails?.linkedInUrl || creatorProfile?.profileDetails?.portfolioUrl ? (
                       <div className=''>
-                        <h3 className='text-lg font-bold'>Links</h3>
+                        <h3 className='text-lg dark:text-neutral-800 font-bold'>Links</h3>
                       </div>
                     ) : null}
                     {creatorProfile?.profileDetails?.gitHubUrl ? (
                       <Link href={creatorProfile?.profileDetails?.gitHubUrl} target='_blank' rel='noopener noreferrer' className='flex items-center space-x-2 py-2 px-2 hover:bg-zinc-200 rounded-lg transition duration-300 ml-[-0.6rem]'>
-                        <h3 className=''><PiGithubLogoBold /></h3>
+                        <h3 className='dark:text-neutral-800'><PiGithubLogoBold /></h3>
                         <p className='text-sm text-gray-600 hover:text-primaryRed'>{creatorProfile?.profileDetails?.gitHubUrl}</p>
                       </Link>
                     ) : null}
                     {creatorProfile?.profileDetails?.linkedInUrl ? (
                       <Link href={creatorProfile?.profileDetails?.linkedInUrl} target='_blank' rel='noopener noreferrer' className='flex items-center space-x-2 py-2 px-2 hover:bg-zinc-200 rounded-lg transition duration-300 ml-[-0.6rem]'>
-                        <h3 className=''><PiLinkedinLogo /></h3>
+                        <h3 className='dark:text-neutral-800'><PiLinkedinLogo /></h3>
                         <p className='text-sm text-gray-600 hover:text-primaryRed'>{creatorProfile?.profileDetails?.linkedInUrl}</p>
                       </Link>
                     ) : null}
                     {creatorProfile?.profileDetails?.portfolioUrl ? (
                       <Link href={creatorProfile?.profileDetails?.portfolioUrl} target='_blank' rel='noopener noreferrer' className='flex items-center space-x-2 py-2 px-2 hover:bg-zinc-200 rounded-lg transition duration-300 ml-[-0.6rem]'>
-                        <h3 className=''><PiLetterCirclePBold /></h3>
+                        <h3 className='dark:text-neutral-800'><PiLetterCirclePBold /></h3>
                         <p className='text-sm text-gray-600 hover:text-primaryRed'>{creatorProfile?.profileDetails?.portfolioUrl}</p>
                       </Link>
                     ) : null}

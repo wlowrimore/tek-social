@@ -43,7 +43,7 @@ export default function SearchInput() {
           value={searchQuery}
           onChange={handleChange}
           placeholder='Keyword Search'
-          className='bg-gray-100 dark:bg-transparent dark:border-none border border-gray-200 text-sm w-full rounded-t outline-none px-4 py-2 placeholder:text-[0.9rem] placeholder:tracking-wider dark:placeholder:text-secondaryRed dark:placeholder:opacity-70' />
+          className='bg-gray-100 dark:bg-neutral-700/50 dark:border-none border border-gray-200 text-sm w-full rounded-t outline-none px-4 py-2 placeholder:text-[0.9rem] placeholder:tracking-wider dark:placeholder:text-secondaryRed dark:placeholder:opacity-70' />
       </form>
       <NewsModal open={open} setOpen={setOpen} searchResults={searchResults} setSearchResults={setSearchResults} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
     </>

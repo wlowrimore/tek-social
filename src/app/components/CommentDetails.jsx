@@ -41,17 +41,17 @@ export default function CommentDetails({ comment, commentId, originalPostId }) {
   }, [likes]);
   console.log("Comment:", comment);
   return (
-    <div className='flex p-3 border-b border-gray-200 hover:opacity-80 transition duration-200 pl-14'>
+    <div className='flex p-3 border-b border-gray-200 dark:border-primaryRed hover:opacity-80 transition duration-200 pl-14'>
       <img src={comment?.userImg} alt='profile' className='h-9 w-9 rounded-full mr-4' />
       <div className='flex-1'>
         <div className='flex items-center justify-between'>
           <div className='flex items-center space-x-1 whitespace-nowrap'>
-            <h4 className='font-bold text-sm truncate'>{comment?.name}</h4>
-            <span className='text-xs truncate'>@{comment?.username}</span>
+            <h4 className='font-bold text-sm truncate dark:text-neutral-200'>{comment?.name}</h4>
+            <span className='text-xs truncate dark:text-neutral-300'>@{comment?.username}</span>
           </div>
         </div>
-        <p className='italic text-xs text-gray-700'>comment posted on {formattedCommentDate}</p>
-        <p className='text-gray-800 text-xs my-3'>{comment?.comment}</p>
+        <p className='italic text-xs text-gray-700 dark:text-gray-400'>comment posted on {formattedCommentDate}</p>
+        <p className='text-gray-800 dark:text-neutral-200 text-sm my-3'>{comment?.comment}</p>
         <div className='flex items-center'>
           {isLiked ? (
             <HiHeart

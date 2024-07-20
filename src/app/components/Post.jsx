@@ -77,10 +77,12 @@ export default function Post({ post, id }) {
           <p className='text-gray-800 dark:text-gray-200 text-sm my-3'>{post?.text}</p>
         </Link>
         <ImageModal open={imgModalOpen} setOpen={setImgModalOpen} src={post?.image} />
-        <div onClick={handleImgClick} className='w-full h-[16rem]'>
-          <img src={post?.image}
-            className='rounded-2xl mr-2 object-cover max-h-[16rem] cursor-pointer' />
-        </div>
+        {post?.image ? (
+          <div onClick={handleImgClick} className='w-full h-[16rem]'>
+            <img src={post?.image}
+              className='rounded-2xl mr-2 object-cover max-h-[16rem] cursor-pointer' />
+          </div>
+        ) : null}
         <Icons id={id} uid={post?.uid} />
       </div>
     </div>

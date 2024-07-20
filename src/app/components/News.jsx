@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import getTechNews from '../utils/getTechNews'
 import Image from 'next/image';
-
+import { HiMiniPlus, HiMiniMinus } from 'react-icons/hi2';
 const News = () => {
   const [news, setNews] = useState([]);
   const [articleNum, setArticleNum] = useState(5);
@@ -25,7 +25,7 @@ const News = () => {
   }, [news])
 
   return (
-    <div className='text-gray-700 space-y-3 rounded-b pt-2 h-screen overflow-y-scroll'>
+    <div className='text-gray-700 space-y-3 rounded-b py-4 h-screen overflow-y-scroll'>
       <h4 className='font-bold text-xl text-gray-800 dark:text-gray-200 px-4'>The Latest in Tech News</h4>
       {news?.slice(0, articleNum).map((article, index) => (
         <div key={article.url}>
@@ -48,7 +48,10 @@ const News = () => {
           </div>
         </div>
       ))}
-      <button onClick={() => setArticleNum(articleNum + 3)} className='text-indigo-600 dark:text-sky-400 text-sm px-4 pb-8 hover:text-indigo-500/80 dark:hover:text-secondaryRed transition duration-200'>Load More</button>
+      <div className='w-full flex items-center justify-between pt-6'>
+        <button onClick={() => setArticleNum(articleNum + 3)} className='flex items-center text-indigo-600 dark:text-sky-400 text-sm px-4 pb-8 hover:text-indigo-500/80 dark:hover:text-secondaryRed transition duration-200'>Load More&nbsp;<span> <HiMiniPlus /></span></button>
+        <button onClick={() => setArticleNum(articleNum - 3)} className='flex items-center text-neutral-950 text-end dark:text-red-400 text-sm px-4 pb-8 hover:text-indigo-500/80 dark:hover:text-secondaryRed transition duration-200'>Show Less&nbsp;<span>  <HiMiniMinus /></span></button>
+      </div>
     </div>
   )
 }

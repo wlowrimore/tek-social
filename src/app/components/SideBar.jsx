@@ -118,31 +118,31 @@ const SideBar = () => {
   }
 
   return (
-    <div className='flex flex-col py-5 px-8 min-w-[18rem] min-h-screen'>
+    <div className='flex flex-col py-14 px-8 min-w-[20rem] min-h-screen'>
       <div className='flex flex-col gap-4'>
         <Link href='/'>
-          <Image src={SiteLogo} alt='Site Logo' width={200} height={200} priority className='w-full py-2 px-3 rounded hover:bg-gray-100 dark:bg-gray-100 transition duration-200' />
+          <Image src={SiteLogo} alt='Site Logo' width={1000} height={1000} priority className='w-full rounded hover:bg-gray-100 dark:bg-neutral-400 transition duration-200' />
         </Link>
-        <Link href='/' className='flex items-center gap-3 py-2 px-3 rounded hover:text-primaryRed hover:bg-gray-100 transition duration-200'>
+        <Link href='/' className='flex items-center gap-3 py-2 px-3 rounded hover:text-primaryRed hover:bg-gray-100 dark:hover:text-gray-200 dark:hover:bg-neutral-800 transition duration-200'>
           <HiHome className='w-7 h-7' />
           <span className='font-bold hidden lg:inline w-fit'>Home</span>
         </Link>
         {!session ? (
-          <div onClick={() => signIn()} className='flex items-center gap-2 cursor-pointer py-2 px-3 rounded hover:text-primaryRed hover:bg-gray-100 transition duration-200'>
+          <div onClick={() => signIn()} className='flex items-center gap-2 cursor-pointer py-2 px-3 rounded hover:text-primaryRed hover:bg-gray-100 dark:hover:text-gray-200 dark:hover:bg-neutral-800 transition duration-200'>
             <HiUserAdd className='w-8 h-8' />
             <span className='font-bold hidden lg:inline w-fit'>Sign In</span>
           </div>
         ) : (
-          <div onClick={() => signOut({ callbackUrl: "/", redirect: true })} className='flex items-center gap-2 cursor-pointer py-2 px-3 rounded hover:text-primaryRed hover:bg-gray-100 transition duration-200'>
+          <div onClick={() => signOut({ callbackUrl: "/", redirect: true })} className='flex items-center gap-2 cursor-pointer py-2 px-3 rounded hover:text-primaryRed hover:bg-gray-100 dark:hover:text-gray-200 dark:hover:bg-neutral-800 transition duration-200'>
             <HiUserRemove className='w-8 h-8' />
             <span className='font-bold hidden lg:inline w-fit'>Sign Out</span>
           </div>
         )}
       </div>
-      <div onClick={toggleTheme} className={`mt-4 theme-icon flex items-center p-3 rounded hover:text-primaryRed hover:bg-gray-100 transition duration-200 ${isHovered ? 'hovered' : ''}`}
+      <div onClick={toggleTheme} className={`mt-4 cursor-pointer theme-icon flex items-center p-3 rounded hover:text-primaryRed hover:bg-gray-100 dark:hover:text-gray-200 dark:hover:bg-neutral-800 transition duration-200 ${isHovered ? 'hovered' : ''}`}
         onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-        <ThemeSwitcher toggleTheme={toggleTheme} isAnimating={isAnimating} theme={theme} />
-        <span className='font-bold hidden lg:inline w-fit cursor-pointer'>Switch Theme</span>
+        <ThemeSwitcher toggleTheme={toggleTheme} isAnimating={isAnimating} theme={theme} className=' dark:hover:text-gray-200 dark:hover:bg-neutral-800' />
+        <span className={`font-bold hidden lg:inline w-fit cursor-pointer dark:hover:text-gray-200 dark:hover:bg-neutral-800 ${isAnimating ? 'opacity-0' : (theme === 'light' || theme === 'dark' ? 'opacity-100' : 'opacity-0')}`}>Switch Theme</span>
       </div>
       <div className={`mt-6 ${isVisible ? 'block opacity-100' : 'block opacity-0'} transition-opacity duration-500`}>
         {successMsgContent && <p className='w-full bg-green-100 text-gray-800 font-bold rounded-lg p-2'>{successMsgContent}</p>}
