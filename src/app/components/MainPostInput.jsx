@@ -97,7 +97,7 @@ const MainPostInput = () => {
         )}
         <p>Theme</p>
       </div>
-      <div className='flex border border-gray-200 p-3 space-x-3 w-full'>
+      <div className='flex border border-gray-200 dark:border-none dark:rounded-lg dark:bg-neutral-800 p-3 space-x-3 w-full'>
         <Image
           src={session.user.image}
           alt={session.user.username}
@@ -107,8 +107,8 @@ const MainPostInput = () => {
         />
         <div className='w-full divide-y divide-gray-200'>
           <textarea
-            className='w-full border-none outline-none tracking-wide min-h-[3rem] py-2 text-gray-700'
-            rows={2}
+            className='w-full border-none outline-none tracking-wide min-h-[3rem] py-2 text-gray-700 dark:text-gray-200 dark:bg-neutral-800'
+            rows={1}
             placeholder={`How can we help, ${session.user.name.split(' ')[0]}?`}
             value={postText}
             onChange={(e) => setPostText(e.target.value)}
@@ -123,13 +123,13 @@ const MainPostInput = () => {
           <div className='flex items-center justify-between pt-2.5'>
             <div className='flex items-center'>
               <div title="Add An Image">
-                <HiOutlinePhoto onClick={() => imagePickRef.current.click()} className='h-10 w-10 p-2 text-primaryRed hover:bg-secondaryRed hover:text-neutral-700 transition duration-200 rounded-full cursor-pointer' />
+                <HiOutlinePhoto onClick={() => imagePickRef.current.click()} className='h-10 w-10 p-2 text-primaryRed dark:text-gray-200 hover:bg-secondaryRed dark:hover:bg-neutral-700 hover:text-neutral-700 transition duration-200 rounded-full cursor-pointer' />
                 <input type='file' ref={imagePickRef} accept='image/*' onChange={addImageToPost} hidden />
               </div>
             </div>
             <button
               disabled={postText.trim() === '' || postLoading || imageFileUploading}
-              className='px-4 py-1 text-primaryRed font-bold hover:bg-secondaryRed hover:text-neutral-700 rounded-md transition duration-200 disabled:opacity-50 cursor-pointer'
+              className='px-4 py-1 text-primaryRed dark:text-gray-200 dark:hover:bg-neutral-700 font-bold hover:bg-secondaryRed hover:text-neutral-700 rounded-md transition duration-200 disabled:opacity-50 cursor-pointer'
               onClick={handleSubmitPost}
             >Post
             </button>

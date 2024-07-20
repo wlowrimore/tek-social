@@ -99,7 +99,7 @@ export default function Icons({ id, uid }) {
       </div>
 
       {session?.user?.uid === uid && (
-        <HiOutlineTrash onClick={deletePost} className='h-8 w-8 cursor-pointer rounded-full transition duration-300 ease-in-out p-2 hover:text-black hover:bg-neutral-400/20' />
+        <HiOutlineTrash onClick={deletePost} className='h-8 w-8 cursor-pointer rounded-full transition duration-300 ease-in-out p-2 hover:text-black dark:hover:text-primaryRed dark:hover:bg-neutral-400 hover:bg-neutral-400/20' />
       )}
     </div>
   )
