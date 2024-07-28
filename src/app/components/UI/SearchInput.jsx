@@ -36,7 +36,7 @@ export default function SearchInput() {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className='w-full'>
+      <form onSubmit={handleSubmit} className='w-full px-4'>
         <input
           type='text'
           name='search'

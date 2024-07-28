@@ -39,7 +39,6 @@ export default function CommentDetails({ comment, commentId, originalPostId }) {
   useEffect(() => {
     setIsLiked(likes.findIndex((like) => like.id === session?.user.uid) !== -1);
   }, [likes]);
-  console.log("Comment:", comment);
   return (
     <div className='flex p-3 border-b border-gray-200 dark:border-primaryRed hover:opacity-80 transition duration-200 pl-14'>
       <img src={comment?.userImg} alt='profile' className='h-9 w-9 rounded-full mr-4' />

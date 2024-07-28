@@ -21,11 +21,10 @@ const News = () => {
 
   useEffect(() => {
     const cleanedUrl = news?.map((article) => article?.multimedia?.[0]?.url.split(','));
-    // console.log("CLEANED URL", cleanedUrl)
   }, [news])
 
   return (
-    <div className='text-gray-700 space-y-3 rounded-b py-4 h-screen overflow-y-scroll'>
+    <div className='text-gray-700 space-y-3 rounded-b py-4 px-4 w-[20rem] h-screen overflow-y-scroll'>
       <h4 className='font-bold text-xl text-gray-800 dark:text-gray-200 px-4'>The Latest in Tech News</h4>
       {news?.slice(0, articleNum).map((article, index) => (
         <div key={article.url}>

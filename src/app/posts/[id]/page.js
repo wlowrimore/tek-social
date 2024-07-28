@@ -8,7 +8,9 @@ export default async function PostPage({ params }) {
   const db = getFirestore(app)
   let data = {};
   const querySnapshot = await getDoc(doc(db, 'posts', params.id));
-  data = { ...querySnapshot.data(), id: querySnapshot.id }
+  data = { ...querySnapshot.data(), id: querySnapshot.id };
+
+  console.log("Data in PostPage:", data)
 
   return (
     <div className='max-w-xl mx-auto border-r dark:border-none border-l min-h-screen'>

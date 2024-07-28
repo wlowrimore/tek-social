@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { HiHome, HiDotsHorizontal, HiUserAdd, HiUserRemove } from "react-icons/hi";
 import SiteLogo from "../../../public/images/site-logo-trans.webp"
+import SiteLogoDark from "../../../public/images/site-logo-dark-trans.webp"
 import UserProfileModal from "../components/UserProfileModal"
 import { userProfileModalState, } from '../../atom/modalAtom';
 import { profileDetailsState, profileDetailsDataState } from "../../atom/profileDetailsAtom";
@@ -120,9 +121,15 @@ const SideBar = () => {
   return (
     <div className='flex flex-col py-14 px-8 min-w-[20rem] min-h-screen'>
       <div className='flex flex-col gap-4'>
-        <Link href='/'>
-          <Image src={SiteLogo} alt='Site Logo' width={1000} height={1000} priority className='w-full rounded hover:bg-gray-100 dark:bg-neutral-400 transition duration-200' />
-        </Link>
+        {theme === 'dark' ? (
+          <Link href='/'>
+            <Image src={SiteLogoDark} alt='Site Logo' width={1000} height={1000} priority className='w-full rounded hover:bg-neutral-800 transition duration-200' />
+          </Link>
+        ) : (
+          <Link href='/'>
+            <Image src={SiteLogo} alt='Site Logo' width={1000} height={1000} priority className='w-full rounded hover:bg-gray-100 dark:bg-neutral-400 transition duration-200' />
+          </Link>
+        )}
         <Link href='/' className='flex items-center gap-3 py-2 px-3 rounded hover:text-primaryRed hover:bg-gray-100 dark:hover:text-gray-200 dark:hover:bg-neutral-800 transition duration-200'>
           <HiHome className='w-7 h-7' />
           <span className='font-bold hidden lg:inline w-fit'>Home</span>
@@ -141,7 +148,7 @@ const SideBar = () => {
       </div>
       <div onClick={toggleTheme} className={`mt-4 cursor-pointer theme-icon flex items-center p-3 rounded hover:text-primaryRed hover:bg-gray-100 dark:hover:text-gray-200 dark:hover:bg-neutral-800 transition duration-200 ${isHovered ? 'hovered' : ''}`}
         onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-        <ThemeSwitcher toggleTheme={toggleTheme} isAnimating={isAnimating} theme={theme} className=' dark:hover:text-gray-200 dark:hover:bg-neutral-800' />
+        <ThemeSwitcher toggleTheme={toggleTheme} isAnimating={isAnimating} theme={theme} className='bg-white text-gray-800 dark:bg-transparent dark:text-white dark:hover:text-gray-200' />
         <span className={`font-bold hidden lg:inline w-fit cursor-pointer dark:hover:text-gray-200 dark:hover:bg-neutral-800 ${isAnimating ? 'opacity-0' : (theme === 'light' || theme === 'dark' ? 'opacity-100' : 'opacity-0')}`}>Switch Theme</span>
       </div>
       <div className={`mt-6 ${isVisible ? 'block opacity-100' : 'block opacity-0'} transition-opacity duration-500`}>

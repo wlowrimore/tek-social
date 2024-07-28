@@ -15,9 +15,9 @@ export default function Post({ post, id }) {
   const [showLink, setShowLink] = useState(false);
   const [imgModalOpen, setImgModalOpen] = useState(false);
   const [open, setOpen] = useRecoilState(posterProfileModalState)
+  const [imageClicked, setImageClicked] = useState(false);
 
   const { data: session } = useSession();
-  // console.log("SESSION DATA:", session)
 
   const postDate = new Date(post?.timestamp?.seconds * 1000).toLocaleString()
   const formattedPostDate = postDate.split(', ')[0];
@@ -43,7 +43,9 @@ export default function Post({ post, id }) {
 
   const handleImgClick = () => {
     if (session) {
-      setImgModalOpen(!imgModalOpen)
+      setImgModalOpen(true)
+      setImageClicked(false);
+      console.log("IMAGE CLICKED FROM ID MODAL:");
     } else {
       signIn();
     }
@@ -75,14 +77,14 @@ export default function Post({ post, id }) {
         <p className='italic text-xs text-gray-700 dark:text-gray-400'>original post on {formattedPostDate}</p>
         <Link href={`/posts/${id}`}>
           <p className='text-gray-800 dark:text-gray-200 text-sm my-3'>{post?.text}</p>
+          {imgModalOpen && <ImageModal open={imgModalOpen} setOpen={setImgModalOpen} src={post?.image} handleImgClick={handleImgClick} />}
+          {post?.image ? (
+            <div className='w-full h-[16rem]'>
+              <img src={post?.image} onClick={handleImgClick}
+                className='rounded-2xl mr-2 object-cover max-h-[16rem] cursor-pointer' />
+            </div>
+          ) : null}
         </Link>
-        <ImageModal open={imgModalOpen} setOpen={setImgModalOpen} src={post?.image} />
-        {post?.image ? (
-          <div onClick={handleImgClick} className='w-full h-[16rem]'>
-            <img src={post?.image}
-              className='rounded-2xl mr-2 object-cover max-h-[16rem] cursor-pointer' />
-          </div>
-        ) : null}
         <Icons id={id} uid={post?.uid} />
       </div>
     </div>

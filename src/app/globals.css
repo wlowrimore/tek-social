@@ -19,6 +19,10 @@
   color: var(--primary-red);
 }
 
+.theme-icon.hovered .sun-icon {
+  color: white;
+}
+
 /* .theme-icon.hovered span {
   color: var(--primary-red);
 } */
